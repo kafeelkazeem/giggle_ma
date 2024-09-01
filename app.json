@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Giggle_fe",
-    "slug": "Giggle_fe",
+    "name": "Giggle",
+    "slug": "Giggle",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/logo/cover.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#AA5B27"
     },
     "ios": {
       "supportsTablet": true
