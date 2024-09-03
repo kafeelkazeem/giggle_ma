@@ -12,7 +12,7 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName='OnBoarding'>
-          <Stack.Screen name='OnBoarding' component={Onboarding} />
+          <Stack.Screen name='OnBoarding' component={Onboarding} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
