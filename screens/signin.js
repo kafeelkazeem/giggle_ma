@@ -2,24 +2,20 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import tw from 'twrnc';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Button } from 'react-native-paper';
+import { Button, Checkbox } from 'react-native-paper';
 import { darkBrown, white } from '../util/colors';
 import AltAuth from '../components/socialAuth';
 
-const SignupPage = ({ navigation }) => {
-  const [name, setName] = useState('');
+const SigninPage = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
-
+  const [rememberMe, setRememberMe] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
 
   const handleSignUp = () => {
     // Handle sign up logic
-    console.log({ name, email, phone, password, confirmPassword });
+    console.log({ email, password, rememberMe });
   };
 
   const handleGoogleSignUp = () => {
@@ -32,11 +28,6 @@ const SignupPage = ({ navigation }) => {
     console.log('Sign up with Facebook');
   };
 
-  const handleLogin = () => {
-    // Navigate to login page
-    navigation.navigate('Signin');
-  };
-
   return (
     <KeyboardAvoidingView
       style={tw`flex-1`}
@@ -44,11 +35,9 @@ const SignupPage = ({ navigation }) => {
     >
       <ScrollView contentContainerStyle={tw`flex-grow justify-center`} keyboardShouldPersistTaps="handled">
         <View style={[tw`p-4`]}>
-          <Text style={[tw`text-2xl font-bold text-left mb-6`, { fontFamily: 'Lato_Regular' }]}>Sign Up</Text>
+          <Text style={[tw`text-2xl font-bold text-left mb-6`, { fontFamily: 'Lato_Regular' }]}>Login</Text>
           {[
-            { placeholder: "Name", value: name, onChangeText: setName, icon: "account" },
             { placeholder: "Email", value: email, onChangeText: setEmail, icon: "email", keyboardType: "email-address" },
-            { placeholder: "Phone", value: phone, onChangeText: setPhone, icon: "phone", keyboardType: "phone-pad" },
             { 
               placeholder: "Password", 
               value: password, 
@@ -57,15 +46,6 @@ const SignupPage = ({ navigation }) => {
               secureTextEntry: !isPasswordVisible, 
               toggleVisibility: () => setIsPasswordVisible(!isPasswordVisible),
               isVisible: isPasswordVisible 
-            },
-            { 
-              placeholder: "Confirm Password", 
-              value: confirmPassword, 
-              onChangeText: setConfirmPassword, 
-              icon: "lock", 
-              secureTextEntry: !isConfirmPasswordVisible, 
-              toggleVisibility: () => setIsConfirmPasswordVisible(!isConfirmPasswordVisible),
-              isVisible: isConfirmPasswordVisible 
             },
           ].map((field, index) => (
             <View
@@ -98,24 +78,25 @@ const SignupPage = ({ navigation }) => {
             </View>
           ))}
 
+          <View style={tw`flex-row items-center mb-4`}>
+            <Checkbox
+              status={rememberMe ? 'checked' : 'unchecked'}
+              onPress={() => setRememberMe(!rememberMe)}
+              color={darkBrown}
+            />
+            <Text style={[tw`ml-2 text-gray-700 text-lg tracking-0.1`, {fontFamily: 'Lato_Regular'}]}>Remember Me</Text>
+          </View>
+
           <Button
             mode="contained"
             onPress={handleSignUp}
             style={[tw`mb-4 p-1`, styles.signUpButton, { backgroundColor: darkBrown }]}
           >
-            Sign Up
+            Login
           </Button>
 
-          <Text style={[tw`text-center text-lg text-gray-500 mb-4`, {fontFamily: 'Lato_Regular'}]}>-Or sign up with-</Text>
+          <Text style={[tw`text-center text-lg text-gray-500 mb-4`, {fontFamily: 'Lato_Regular'}]}>-Or login with-</Text>
           <AltAuth />
-          <View style={tw`flex items-center justify-center mt-6`}>
-            <Text style={[tw`text-gray-500 text-lg`, {fontFamily: 'Lato_Regular'}]}>
-              Already have an account?{' '}
-              <Text style={{color: darkBrown}} onPress={handleLogin}>
-                Login
-              </Text>
-            </Text>
-          </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -132,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignupPage;
+export default SigninPage;
