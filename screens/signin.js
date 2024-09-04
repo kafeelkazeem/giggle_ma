@@ -95,7 +95,7 @@ const SigninPage = ({ navigation }) => {
             Login
           </Button>
 
-          <Text style={[tw`text-center text-lg text-gray-500 mb-4`, {fontFamily: 'Lato_Regular'}]}>-Or login with-</Text>
+          <Text style={[tw`text-center text-lg text-gray-500 mb-4`, {fontFamily: 'Lato_Regular'}]}>- Or login with -</Text>
           <AltAuth />
         </View>
       </ScrollView>

@@ -30,6 +30,8 @@ export default function App() {
     return null; // or you can show a loading indicator here
   }
   return (
+    <>
+    <StatusBar style='light' />
     <PaperProvider theme={customTheme}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName='OnBoarding'>
@@ -39,5 +41,6 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
+    </>
   );
 }

@@ -106,7 +106,7 @@ const SignupPage = ({ navigation }) => {
             Sign Up
           </Button>
 
-          <Text style={[tw`text-center text-lg text-gray-500 mb-4`, {fontFamily: 'Lato_Regular'}]}>-Or sign up with-</Text>
+          <Text style={[tw`text-center text-lg text-gray-500 mb-4`, {fontFamily: 'Lato_Regular'}]}>- Or sign up with -</Text>
           <AltAuth />
           <View style={tw`flex items-center justify-center mt-6`}>
             <Text style={[tw`text-gray-500 text-lg`, {fontFamily: 'Lato_Regular'}]}>
