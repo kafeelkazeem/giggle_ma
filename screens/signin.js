@@ -15,6 +15,7 @@ const SigninPage = ({ navigation }) => {
 
   const handleSignUp = () => {
     // Handle sign up logic
+    navigation.navigate('App')
     console.log({ email, password, rememberMe });
   };
 

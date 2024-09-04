@@ -7,6 +7,7 @@ import { useFonts } from 'expo-font';
 import { darkBrown, white } from './util/colors';
 import SignupPage from './screens/signup';
 import SigninPage from './screens/signin';
+import BottomNav from './layouts/bottomNav';
 
 const customTheme = {
   ...DefaultTheme,
@@ -38,6 +39,7 @@ export default function App() {
           <Stack.Screen name='OnBoarding' component={Onboarding} options={{headerShown: false}} />
           <Stack.Screen name='Signup' component={SignupPage} options={{title: ' ', headerShown: true, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white}} />
           <Stack.Screen name='Signin' component={SigninPage} options={{title: ' ', headerShown: true, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white}} />
+          <Stack.Screen name='App' component={BottomNav} options={{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
