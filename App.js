@@ -33,7 +33,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName='OnBoarding'>
           <Stack.Screen name='OnBoarding' component={Onboarding} options={{headerShown: false}} />
-          <Stack.Screen name='Signup' component={SignupPage} options={{title: ' ', headerShown: true, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white}} />
+          <Stack.Screen name='Signup' component={SignupPage} options={{title: ' ', headerShown: false, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white}} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
