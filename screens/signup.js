@@ -108,14 +108,14 @@ const SignupPage = ({ navigation }) => {
           style={tw`flex-1 p-3 rounded mr-2 flex items-center justify-center bg-red-500 basis-1/4`}
           onPress={handleGoogleSignUp}
         >
-          <Icon name="google" size={24} color="#DB4437" />
+          <Icon name="google" size={24} color={white} />
         </TouchableOpacity>
 
         <TouchableOpacity
           style={tw`flex-1 p-3 rounded ml-2 flex items-center justify-center bg-blue-500 basis-1/4`}
           onPress={handleFacebookSignUp}
         >
-          <Icon name="facebook" size={24} color="#3b5998" />
+          <Icon name="facebook" size={24} color={white} />
         </TouchableOpacity>
       </View>
       <View style={tw`flex items-center justify-center mt-10`}>
