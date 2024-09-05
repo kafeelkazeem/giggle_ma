@@ -32,7 +32,7 @@ export default function App() {
   }
   return (
     <>
-    <StatusBar style='light' backgroundColor={darkBrown} />
+    <StatusBar style='light' backgroundColor={darkBrown}/>
     <PaperProvider theme={customTheme}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName='OnBoarding'>
