@@ -13,7 +13,7 @@ const customTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: darkBrown, // Replace with your custom color
+    primary: darkBrown, 
     secondary: darkBrown
   },
 };
