@@ -20,8 +20,8 @@ const BottomNav = () => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'home', title: 'Home', focusedIcon: 'home'},
-    { key: 'search', title: 'Search', focusedIcon: 'search'},
-    { key: 'map', title: 'Map', focusedIcon: 'location' },
+    { key: 'search', title: 'Search', focusedIcon: 'magnify'},
+    { key: 'map', title: 'Map', focusedIcon: 'map-marker' },
     { key: 'settings', title: 'Settings', focusedIcon: 'cog'},
   ]);
 
@@ -39,7 +39,7 @@ const BottomNav = () => {
       renderScene={renderScene}
       barStyle={styles.bottomNav}
       activeColor= {darkBrown} 
-      activeIndicatorStyle={{backgroundColor: "rgba(0, 168, 90, 0.2)"}}
+      activeIndicatorStyle={{backgroundColor: "rgba(70, 91, 31, 0.2)"}}
       sceneAnimationEnabled
       sceneAnimationType='shifting'
       inactiveColor={'#000'}
@@ -49,7 +49,7 @@ const BottomNav = () => {
 
 const styles = StyleSheet.create({ 
   bottomNav: {
-    backgroundColor: '#fff', 
+    backgroundColor: '#fefae0', 
   },
 });
 
