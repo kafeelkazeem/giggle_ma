@@ -1,13 +1,14 @@
-import React from "react";
-import { View } from "react-native";
-import { white, darkBrown } from "../util/colors";
+import React from 'react';
+import { View } from 'react-native';
+import tw from 'twrnc';
+import AppBar from '../layouts/appBar';
 
-const HomePage = () =>{
-    return(
-        <View style={{flex: 1, backgroundColor: white}}>
+const HomePage = () => {
+  return (
+    <View style={tw`flex-1 bg-white`}>
+      <AppBar />
+    </View>
+  );
+};
 
-        </View>
-    )
-}
-
-export default HomePage
+export default HomePage;
