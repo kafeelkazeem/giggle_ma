@@ -3,8 +3,9 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Keyboa
 import tw from 'twrnc';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from 'react-native-paper';
-import { darkBrown, white } from '../util/colors';
+import { darkBrown} from '../util/colors';
 import AltAuth from '../components/socialAuth';
+import axios from 'axios';
 
 const SignupPage = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -17,9 +18,15 @@ const SignupPage = ({ navigation }) => {
 
   const [focusedField, setFocusedField] = useState(null);
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     // Handle sign up logic
-    console.log({ name, email, phone, password, confirmPassword });
+    const formData = { name: name, email: email, phoneNumber: phone, password: password};
+    try {
+      const response = await axios.post(`${'https://giggle-be.onrender.com/api'}/registerCustomer`, formData)
+      console.log(response.data) 
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const handleGoogleSignUp = () => {
