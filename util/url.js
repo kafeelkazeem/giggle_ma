@@ -1,0 +1,1 @@
+export const ApiUrl = 'https://giggle-be.onrender.com/api'

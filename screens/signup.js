@@ -6,9 +6,10 @@ import { Button } from 'react-native-paper';
 import { darkBrown} from '../util/colors';
 import AltAuth from '../components/socialAuth';
 import axios from 'axios';
+import { ApiUrl } from '../util/url';
 
 const SignupPage = ({ navigation }) => {
-  const [name, setName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -20,9 +21,9 @@ const SignupPage = ({ navigation }) => {
 
   const handleSignUp = async () => {
     // Handle sign up logic
-    const formData = { name: name, email: email, phoneNumber: phone, password: password};
+    const formData = { fullName: fullName, email: email, phoneNumber: phone, password: password};
     try {
-      const response = await axios.post(`${'https://giggle-be.onrender.com/api'}/registerCustomer`, formData)
+      const response = await axios.post(`${ApiUrl}/registerCustomer`, formData)
       console.log(response.data) 
     } catch (error) {
       console.log(error)
@@ -53,7 +54,7 @@ const SignupPage = ({ navigation }) => {
         <View style={[tw`p-4`]}>
           <Text style={[tw`text-2xl font-bold text-left mb-6`, { fontFamily: 'Lato_Regular' }]}>Sign Up</Text>
           {[
-            { placeholder: "Name", value: name, onChangeText: setName, icon: "account" },
+            { placeholder: "Name", value: fullName, onChangeText: setFullName, icon: "account" },
             { placeholder: "Email", value: email, onChangeText: setEmail, icon: "email", keyboardType: "email-address" },
             { placeholder: "Phone", value: phone, onChangeText: setPhone, icon: "phone", keyboardType: "phone-pad" },
             { 
