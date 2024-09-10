@@ -5,8 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboarding from './screens/onBoarding';
 import { useFonts } from 'expo-font';
 import { darkBrown, white } from './util/colors';
-import SignupPage from './screens/signup';
-import SigninPage from './screens/signin';
+import SignupPage from './screens/auth/signup';
+import SigninPage from './screens/auth/signin';
 import BottomNav from './layouts/bottomNav';
 
 const customTheme = {
