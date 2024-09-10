@@ -3,8 +3,10 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Keyboa
 import tw from 'twrnc';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button, Checkbox } from 'react-native-paper';
-import { darkBrown, white } from '../util/colors';
+import { darkBrown } from '../util/colors';
 import AltAuth from '../components/socialAuth';
+import axios from 'axios';
+import { ApiUrl } from '../util/url';
 
 const SigninPage = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -13,10 +15,16 @@ const SigninPage = ({ navigation }) => {
   const [rememberMe, setRememberMe] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
 
-  const handleSignUp = () => {
-    // Handle sign up logic
-    navigation.navigate('App')
-    console.log({ email, password, rememberMe });
+  const handleLogin = async () => {
+
+    const formData = {email, password}
+    try {
+      const response = await axios.post(`${ApiUrl}/customerLogin`, formData)
+      console.log(response.data)
+      navigation.navigate('App')
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   const handleGoogleSignUp = () => {
@@ -87,15 +95,14 @@ const SigninPage = ({ navigation }) => {
             />
             <Text style={[tw`ml-2 text-gray-700 text-lg tracking-0.1`, {fontFamily: 'Lato_Regular'}]}>Remember Me</Text>
           </View>
-
+          
           <Button
             mode="contained"
-            onPress={handleSignUp}
+            onPress={handleLogin}
             style={[tw`mb-4 p-1`, styles.signUpButton, { backgroundColor: darkBrown }]}
           >
             Login
           </Button>
-
           <Text style={[tw`text-center text-lg text-gray-500 mb-4`, {fontFamily: 'Lato_Regular'}]}>- Or login with -</Text>
           <AltAuth />
         </View>
