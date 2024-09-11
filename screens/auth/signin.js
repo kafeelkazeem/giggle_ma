@@ -126,7 +126,7 @@ const SigninPage = ({ navigation }) => {
                   style={[tw`mb-4 p-1`, styles.signUpButton, { backgroundColor: darkBrown }]}
                   disabled={loading}
                 >
-                  {loading ? <ActivityIndicator color="#fff" /> : 'Login'}
+                  {loading ? <ActivityIndicator size={25} color="#fff" /> : 'Login'}
                 </Button>
               </>
             )}
