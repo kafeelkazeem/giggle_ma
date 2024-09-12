@@ -15,7 +15,7 @@ const HomePage = () => {
       <View style={tw`flex-1 p-3 pt-5`}>
         <Search />
         <View style={tw`mt-1 p-2`}>
-          <Text style={[tw`font-bold text-3xl`, { fontFamily: 'Lato_Regular' }]}>
+          <Text style={[tw`font-bold text-3xl tracking-0.3`, { fontFamily: 'Lato_Regular' }]}>
             Category
           </Text>
         </View>
@@ -26,15 +26,10 @@ const HomePage = () => {
           numColumns={3} // Set number of columns to 3
           renderItem={({ item }) => (
             <View style={tw`flex-1 items-center p-4`}>
-              {/* Circle Icon */}
-              <View style={[tw`w-20 h-20 rounded-2xl p-2`, {backgroundColor: 'rgba(221, 161, 94, 0.2)'}]}>
+              <View style={[tw`w-18 h-18 rounded-2xl p-2`, {backgroundColor: 'rgba(221, 161, 94, 0.2)'}]}>
                 {item.svg ? item.svg : <Electrician />}
               </View>
-              {/* <Svg height="50" width="50">
-                <Circle cx="25" cy="25" r="25" fill="lightblue" />
-              </Svg> */}
-              {/* Category Name */}
-              <Text style={[tw`text-center mt-2 font-bold`, {fontFamily: 'Lato_Regular'}]}>{item.name}</Text>
+              <Text style={[tw`text-center mt-2 font-bold tracking-0.3`, {fontFamily: 'Lato_Regular'}]}>{item.name}</Text>
             </View>
           )}
         />

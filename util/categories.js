@@ -37,7 +37,7 @@ export const categories = [
     { name: 'Caterer', svg: <Cake />},
     { name: 'Generator Repair', svg: <Gen /> },
     { name: 'Photographer', svg: <Photographer /> },
-    { name: 'Electronics', svg: <Tv /> },
+    { name: 'Electronic Repair', svg: <Tv /> },
     { name: 'Phone Repair', svg: <Phone />},
     { name: 'Dj', svg: <Dj /> },
     { name: 'Mc', svg: <Mc /> },
