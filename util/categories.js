@@ -1,0 +1,23 @@
+export const categories = [
+    { name: 'Carpenter' },
+    { name: 'Tailor' },
+    { name: 'Electrician' },
+    { name: 'Mechanic' },
+    { name: 'Plumber' },
+    { name: 'Painter' },
+    { name: 'Cleaner' },
+    { name: 'Laundry'},
+    { name: 'Bricklayer' },
+    { name: 'Welder' },
+    { name: 'Architect' },
+    { name: 'Barber'},
+    { name: 'Hair Dresser'},
+    { name: 'Caterer'},
+    { name: 'Generator Repair' },
+    { name: 'Fridge Repair' },
+    { name: 'Electronics' },
+    { name: 'Phone Repair'},
+    { name: 'Dj' },
+    { name: 'Mc' },
+    { name: 'Makeup Artist' }
+  ];

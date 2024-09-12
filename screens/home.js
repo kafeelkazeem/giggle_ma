@@ -4,28 +4,7 @@ import tw from 'twrnc';
 import AppBar from '../layouts/appBar';
 import Search from '../components/searchBar';
 import { Svg, Circle } from 'react-native-svg'; // For rendering the circle icon
-
-const categories = [
-  { name: 'Carpenter' },
-  { name: 'Tailor' },
-  { name: 'Electrician' },
-  { name: 'Mechanic' },
-  { name: 'Plumber' },
-  { name: 'Painter' },
-  { name: 'Cleaner' },
-  { name: 'Laundry'},
-  { name: 'Bricklayer' },
-  { name: 'Welder' },
-  { name: 'Architect' },
-  { name: 'Barber'},
-  { name: 'Hair Dresser'},
-  { name: 'Caterer'},
-  { name: 'Generator Repair' },
-  { name: 'Fridge Repair' },
-  { name: 'Electronics' },
-  { name: 'Phone Repair'}
-  // Add more categories as needed
-];
+import { categories } from '../util/categories';
 
 const HomePage = () => {
   return (
