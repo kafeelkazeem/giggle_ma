@@ -11,7 +11,7 @@ const Search = ({ searchQuery, setSearchQuery }) => {
         onChangeText={setSearchQuery}
         value={searchQuery}
         mode='bar'
-        theme={{ colors: { primary: lightBrown } }}
+        theme={{ colors: { primary: lightBrown, placeholder: 'grey' } }}  
         style={{
           backgroundColor: "rgba(221, 161, 94, 0.2)", 
           borderColor: 'grey', 
