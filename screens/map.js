@@ -49,7 +49,7 @@ const MapScreen = () => {
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} region={region} showsUserLocation={true} mapType="satelliteFlyover">
+      <MapView style={styles.map} region={region} showsUserLocation={true} mapType="standard">
         {location && (
           <Marker
             coordinate={{
@@ -66,7 +66,7 @@ const MapScreen = () => {
           description="Tailor"
         />
         <Marker
-          coordinate={{ latitude: 12.00024956459915, longitude: 8.54142588159298 }}
+          coordinate={{ latitude: 12.0261093, longitude: 8.5857369 }}
           title="Service Provider 2"
           description="Carpenter"
         />
