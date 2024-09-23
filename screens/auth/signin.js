@@ -99,7 +99,7 @@ const SigninPage = ({ navigation }) => {
                     />
                     <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
                       <Icon
-                        name={isPasswordVisible ? 'eye-off' : 'eye'}
+                        name={isPasswordVisible ? 'leye-off' : 'eye'}
                         size={24}
                         color={darkBrown}
                       />
