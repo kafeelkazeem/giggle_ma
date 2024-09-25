@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import tw from 'twrnc';
 import AppBar from '../layouts/appBar';
 import Search from '../components/searchBar';
 import { categories } from '../util/categories';
 import Electrician from '../assets/svg/categories/electrician.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+
+  const navigation = useNavigation()
 
   // Filter the categories based on the search query
   const filteredCategories = categories.filter((category) =>
     category.name.toLowerCase().startsWith(searchQuery.toLowerCase())
   );
 
+  const handleCategoryPress = (category) => {
+    navigation.navigate('selectedCategory', {categoryName: category.name})
+  };
+
   return (
     <View style={tw`flex-1 bg-white`}>
       <AppBar />
-      <View style={tw`flex-1 p-3 pt-5`}>
+      <View style={tw`flex-1 p-3 pt-3`}>
         {/* Pass the searchQuery and setSearchQuery to the Search component */}
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <View style={tw`mt-1 p-2`}>
@@ -39,14 +46,17 @@ const HomePage = () => {
             keyExtractor={(item, index) => index.toString()}
             numColumns={3}
             renderItem={({ item }) => (
-              <View style={tw`flex-1 items-center p-4`}>
-                <View style={[tw`w-18 h-18 rounded-2xl p-2`, { backgroundColor: 'rgba(221, 161, 94, 0.2)', borderWidth: 1, borderCOlor: 'grey' }]}>
+              <TouchableOpacity
+                style={tw`flex-1 items-center p-4`}
+                onPress={() => handleCategoryPress(item)}
+              >
+                <View style={[tw`w-18 h-18 rounded-2xl p-2`, { backgroundColor: 'rgba(221, 161, 94, 0.2)', borderWidth: 1, borderColor: 'grey' }]}>
                   {item.svg ? item.svg : <Electrician />}
                 </View>
                 <Text style={[tw`text-center mt-2 font-bold tracking-0.3`, { fontFamily: 'Lato_Regular' }]}>
                   {item.name}
                 </Text>
-              </View>
+              </TouchableOpacity>
             )}
           />
         )}

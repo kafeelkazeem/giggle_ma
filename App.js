@@ -4,10 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboarding from './screens/onBoarding';
 import { useFonts } from 'expo-font';
-import { darkBrown, white } from './util/colors';
+import { darkBrown, darkGreen, white } from './util/colors';
 import SignupPage from './screens/auth/signup';
 import SigninPage from './screens/auth/signin';
 import BottomNav from './layouts/bottomNav';
+import SelectedCategory from './screens/selectedCategory';
 
 const customTheme = {
   ...DefaultTheme,
@@ -40,6 +41,7 @@ export default function App() {
           <Stack.Screen name='Signup' component={SignupPage} options={{title: ' ', headerShown: true, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white}} />
           <Stack.Screen name='Signin' component={SigninPage} options={{title: ' ', headerShown: true, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white}} />
           <Stack.Screen name='App' component={BottomNav} options={{headerShown: false}} />
+          <Stack.Screen name='selectedCategory' component={SelectedCategory} options={{title: 'Category', headerTitleStyle: {color: white }, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white, headerShown: true}} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
