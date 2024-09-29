@@ -56,7 +56,7 @@ const MapScreen = () => {
               latitude: location.latitude,
               longitude: location.longitude,
             }}
-            title={'You are here'}
+            title={`${location.latitude}, ${location.longitude}`}
           />
         )}
         {/* Add markers for service providers (example data) */}
