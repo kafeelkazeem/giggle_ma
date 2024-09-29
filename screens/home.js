@@ -8,6 +8,7 @@ import Electrician from '../assets/svg/categories/electrician.svg';
 import { useNavigation } from '@react-navigation/native';
 
 const HomePage = () => {
+  
   const [searchQuery, setSearchQuery] = useState('');
 
   const navigation = useNavigation()
