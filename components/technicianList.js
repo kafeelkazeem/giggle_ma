@@ -27,9 +27,7 @@ const CustomStarRating = ({ rating }) => {
   };
   
 
-const TechnicianList = () => {
-  const [rating, setRating] = useState(3);
-
+const TechnicianList = ({businessName, category, address, ratings}) => {
   return (
     <Card style={tw`m-3 p-3`}>
       <View style={tw`flex-row`}>
@@ -43,13 +41,13 @@ const TechnicianList = () => {
         {/* Right side content */}
         <View style={tw`flex-1 gap-1`}>
           {/* Name, category, address */}
-          <Text style={tw`text-xl font-bold`}>John Doe</Text>
-          <Text style={tw`text-sm text-gray-600`}>Electrician</Text>
-          <Text style={tw`text-sm text-gray-600`}><Feather name="map-pin" size={18} color='grey' /> 123 Main St, Cityville</Text>
+          <Text style={tw`text-xl font-bold`}>{businessName}</Text>
+          <Text style={tw`text-sm text-gray-600`}>{category}</Text>
+          <Text style={tw`text-sm text-gray-600`}><Feather name="map-pin" size={18} color='grey' />{` ${address}`}</Text>
           
           {/* Custom Star ratings */}
           <View style={tw`my-1`}>
-            <CustomStarRating rating={rating} setRating={setRating} />
+            <CustomStarRating rating={ratings} />
           </View>
 
           {/* Action buttons */}

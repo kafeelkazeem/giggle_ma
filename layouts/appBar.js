@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image } from 'react-native';
 import tw from 'twrnc';
 import { Appbar, Avatar } from 'react-native-paper';
-import { white, darkBrown } from '../util/colors';
+import { white, darkBrown, lightGreen, darkGreen } from '../util/colors';
 import logo from '../assets/logo/cover.png';
 
 const AppBar = () => {
@@ -29,7 +29,7 @@ const AppBar = () => {
           style={tw`w-50 h-15 -ml-5`} 
         />
         <Appbar.Content />
-        <Avatar.Text size={35} label="A" style={tw`bg-[${white}]`} />
+        <Avatar.Text size={40} label="A" style={tw`bg-[#129a5f]`} />
       </Appbar.Header>
     </View>
   );

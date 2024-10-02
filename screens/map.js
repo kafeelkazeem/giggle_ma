@@ -50,15 +50,6 @@ const MapScreen = () => {
   return (
     <View style={styles.container}>
       <MapView style={styles.map} region={region} showsUserLocation={true} mapType="standard">
-        {location && (
-          <Marker
-            coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }}
-            title={`${location.latitude}, ${location.longitude}`}
-          />
-        )}
         {/* Add markers for service providers (example data) */}
         <Marker
           coordinate={{ latitude: 12.002179, longitude: 8.591956 }}

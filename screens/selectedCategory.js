@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, FlatList } from 'react-native';
 import tw from 'twrnc';
 import * as Location from 'expo-location';
 import TechnicianList from '../components/technicianList';
@@ -41,7 +41,7 @@ const SelectedCategory = ({route}) => {
               longitude: location.longitude,
             },
           });
-          setTechnicians(response.data); // Store the fetched data
+          setTechnicians(response.data.nearestTechnician); // Store the fetched data
           console.log(response.data)
         } catch (error) {
           console.log('An error occurred while fetching technicians', error);
@@ -76,7 +76,18 @@ const SelectedCategory = ({route}) => {
   return (
     <View style={tw`flex-1`}>
       {/* Pass the fetched technicians to the TechnicianList */}
-      <TechnicianList technicians={technicians} />
+      {/* <TechnicianList technicians={technicians} /> */}
+      {technicians.length <= 0 ? (
+            <View style={tw`flex-1 justify-center items-center`}>
+              <Text style={tw`text-xl`}>There are no Events</Text>
+            </View>
+        ) : (
+          <FlatList
+            data={technicians}
+            renderItem={({ item }) => <TechnicianList id={item._id} businessName={item.businessName} category={item.category} address={item.address} ratings={item.ratings}  />}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        )}
     </View>
   );
 };
