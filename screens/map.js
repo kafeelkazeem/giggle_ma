@@ -6,20 +6,22 @@ import tw from 'twrnc';
 import { Picker } from '@react-native-picker/picker';
 import { Ionicons } from '@expo/vector-icons'; // Icon for dropdown
 import { darkBrown, lightGreen } from '../util/colors';
+import { ApiUrl } from '../util/url';
 
 const MapScreen = () => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [selectedTechnician, setSelectedTechnician] = useState('All'); // State for selected technician
+  const [selectedCategory, setSelectedCategory] = useState('All'); // State for selected technician
   const [filteredMarkers, setFilteredMarkers] = useState([]);
+  const [technicians, setTechnicians] = useState([])
 
-  // Mock data for service providers
-  const serviceProviders = [
-    { id: 1, type: 'Tailor', latitude: 12.002179, longitude: 8.591956, title: 'Service Provider 1' },
-    { id: 2, type: 'Carpenter', latitude: 12.0261093, longitude: 8.5857369, title: 'Service Provider 2' },
-    { id: 3, type: 'Electrician', latitude: 12.015345, longitude: 8.588789, title: 'Service Provider 3' },
-    { id: 4, type: 'Painter', latitude: 12.008764, longitude: 8.591467, title: 'Service Provider 4' },
-  ];
+  // // Mock data for service providers
+  // const serviceProviders = [
+  //   { id: 1, type: 'Tailor', latitude: 12.002179, longitude: 8.591956, title: 'Service Provider 1' },
+  //   { id: 2, type: 'Carpenter', latitude: 12.0261093, longitude: 8.5857369, title: 'Service Provider 2' },
+  //   { id: 3, type: 'Electrician', latitude: 12.015345, longitude: 8.588789, title: 'Service Provider 3' },
+  //   { id: 4, type: 'Painter', latitude: 12.008764, longitude: 8.591467, title: 'Service Provider 4' },
+  // ];
 
   useEffect(() => {
     (async () => {
@@ -37,13 +39,19 @@ const MapScreen = () => {
   }, []);
 
   useEffect(() => {
-    // Filter markers based on the selected technician type
-    if (selectedTechnician === 'All') {
-      setFilteredMarkers(serviceProviders);
-    } else {
-      setFilteredMarkers(serviceProviders.filter(sp => sp.type === selectedTechnician));
-    }
-  }, [selectedTechnician]);
+    (async () =>{
+      try {
+        const response = await axios.get(`${ApiUrl}/techniciansLocation`, {
+          params:{
+            selectedCategory: selectedCategory
+          }
+        })
+        setTechnicians(response.data.techniciansLocation)
+      } catch (error) {
+        console.log('an error occured')
+      }
+    })
+  }, [selectedCategory]);
 
   // Show an error message if location is not available
   if (errorMsg) {
@@ -74,10 +82,10 @@ const MapScreen = () => {
       {/* Styled dropdown container */}
       <TouchableOpacity style={styles.dropdownContainer}>
         <Picker
-          selectedValue={selectedTechnician}
+          selectedValue={selectedCategory}
           style={styles.picker}
           dropdownIconColor='white'
-          onValueChange={(itemValue) => setSelectedTechnician(itemValue)}
+          onValueChange={(itemValue) => setSelectedCategory(itemValue)}
         >
           <Picker.Item label="All" value="All" />
           <Picker.Item label="Tailor" value="Tailor" />
@@ -88,7 +96,7 @@ const MapScreen = () => {
       </TouchableOpacity>
 
       <MapView style={styles.map} region={region} showsUserLocation={true} mapType="standard">
-        {filteredMarkers.map((marker) => (
+        {technicians.map((marker) => (
           <Marker
             key={marker.id}
             coordinate={{ latitude: marker.latitude, longitude: marker.longitude }}
