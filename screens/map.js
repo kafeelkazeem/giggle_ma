@@ -7,6 +7,7 @@ import { Picker } from '@react-native-picker/picker';
 import { Ionicons } from '@expo/vector-icons'; // Icon for dropdown
 import { darkBrown, lightGreen } from '../util/colors';
 import { ApiUrl } from '../util/url';
+import axios from 'axios';
 
 const MapScreen = () => {
   const [location, setLocation] = useState(null);
@@ -39,7 +40,7 @@ const MapScreen = () => {
   }, []);
 
   useEffect(() => {
-    (async () =>{
+    const fetchTechnician = async () =>{
       try {
         const response = await axios.get(`${ApiUrl}/techniciansLocation`, {
           params:{
@@ -50,7 +51,8 @@ const MapScreen = () => {
       } catch (error) {
         console.log('an error occured')
       }
-    })
+    }
+    fetchTechnician()
   }, [selectedCategory]);
 
   // Show an error message if location is not available
@@ -98,10 +100,10 @@ const MapScreen = () => {
       <MapView style={styles.map} region={region} showsUserLocation={true} mapType="standard">
         {technicians.map((marker) => (
           <Marker
-            key={marker.id}
+            key={marker._id}
             coordinate={{ latitude: marker.latitude, longitude: marker.longitude }}
-            title={marker.title}
-            description={marker.type}
+            title={marker.businessName}
+            description={marker.category}
           />
         ))}
       </MapView>
