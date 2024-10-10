@@ -7,7 +7,7 @@ import axios from 'axios';
 import { ApiUrl } from '../util/url';
 import { darkBrown } from '../util/colors';
 
-const SelectedCategory = ({route}) => {
+const SelectedCategory = ({route, navigation}) => {
   const {categoryName} = route.params;
 
   const [location, setLocation] = useState(null);
@@ -16,7 +16,14 @@ const SelectedCategory = ({route}) => {
   const [technicians, setTechnicians] = useState([]); 
 
   useEffect(() => {
+    navigation.setOptions({
+      title: categoryName, // Set header title dynamically
+    });
+  }, [navigation, categoryName]);
+
+  useEffect(() => {
     (async () => {
+      setLoading(true)
       // Request permission for location access
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -79,12 +86,12 @@ const SelectedCategory = ({route}) => {
       {/* <TechnicianList technicians={technicians} /> */}
       {technicians.length <= 0 ? (
             <View style={tw`flex-1 justify-center items-center`}>
-              <Text style={tw`text-xl`}>No Technician found within 10km of you</Text>
+              <Text style={tw`text-xl`}>{`No nearby ${categoryName} found`.toLowerCase()}</Text>
             </View>
         ) : (
           <FlatList
             data={technicians}
-            renderItem={({ item }) => <TechnicianList id={item._id} businessName={item.businessName} category={item.category} address={item.address} ratings={item.ratings}  />}
+            renderItem={({ item }) => <TechnicianList id={item._id} businessName={item.businessName} category={item.category} address={item.address} ratings={item.ratings} route='singleTechnician' />}
             keyExtractor={(item, index) => index.toString()}
           />
         )}

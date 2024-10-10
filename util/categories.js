@@ -29,7 +29,7 @@ export const categories = [
     { name: 'Cleaner', svg: <Cleaner /> },
     { name: 'Laundry', svg: <Laundry /> },
     { name: 'Bricklayer', svg: <Builder /> },
-    { name: 'Welder', svg: <Welder /> },
+    { name: 'Welder', svg: <Welder /> }, 
     { name: 'Architect', svg: <Architect /> },
     { name: 'Barber', svg: <Barber /> },
     { name: 'Tailor', svg: <Tailor /> },

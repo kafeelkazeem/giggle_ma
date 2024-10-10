@@ -5,6 +5,7 @@ import { Card, Avatar, Text, Button } from 'react-native-paper';
 import tw from 'twrnc';
 import Pic from '../assets/image/avater.png'
 import Feather from '@expo/vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 
 const CustomStarRating = ({ rating }) => {
     const maxStars = 5;  
@@ -27,7 +28,14 @@ const CustomStarRating = ({ rating }) => {
   };
   
 
-const TechnicianList = ({businessName, category, address, ratings}) => {
+const TechnicianList = ({businessName, category, address, ratings, route}) => {
+
+  const navigation = useNavigation()
+
+  const onView = () =>{
+    navigation.navigate(route)
+  }
+
   return (
     <Card style={tw`m-3 p-3`}>
       <View style={tw`flex-row`}>
@@ -52,11 +60,11 @@ const TechnicianList = ({businessName, category, address, ratings}) => {
 
           {/* Action buttons */}
           <View style={tw`flex-row justify-between gap-2 mt-2`}>
-            <Button mode="contained" onPress={() => console.log('Contact')}>
-              Contact
+            <Button mode="contained" onPress={onView}>
+              View
             </Button>
-            <Button mode="outlined" onPress={() => console.log('Details')}>
-              Details
+            <Button mode="outlined" onPress={() => console.log('Contact')}>
+              Contact
             </Button>
           </View>
         </View>
