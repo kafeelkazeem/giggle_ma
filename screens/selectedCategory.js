@@ -79,7 +79,7 @@ const SelectedCategory = ({route}) => {
       {/* <TechnicianList technicians={technicians} /> */}
       {technicians.length <= 0 ? (
             <View style={tw`flex-1 justify-center items-center`}>
-              <Text style={tw`text-xl`}>There are no Events</Text>
+              <Text style={tw`text-xl`}>No Technician found within 10km of you</Text>
             </View>
         ) : (
           <FlatList

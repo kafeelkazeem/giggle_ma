@@ -37,7 +37,6 @@ const SearchPage = () => {
         rippleColor={darkBrown}
       />
       </View>
-
       {/* Rest of the content */}
     </View>
   );
