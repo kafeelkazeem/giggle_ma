@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Button } from "react-native";
+import { View } from "react-native";
 import { Appbar, Searchbar } from "react-native-paper";
 import tw from 'twrnc';
 import { darkBrown, lightBrown } from "../util/colors";

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; 
 import { Card, Avatar, Text, Button } from 'react-native-paper';
 import tw from 'twrnc';
