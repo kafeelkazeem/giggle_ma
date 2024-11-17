@@ -1,33 +1,12 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'; 
+import { View } from 'react-native'; 
 import { Card, Avatar, Text, Button } from 'react-native-paper';
 import tw from 'twrnc';
 import Pic from '../assets/image/avater.png'
 import Feather from '@expo/vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
-
-const CustomStarRating = ({ rating }) => {
-    const maxStars = 5;  
-    return (
-      <View style={tw`flex-row`}>
-        {Array.from({ length: maxStars }, (_, index) => {
-          const starNumber = index + 1;
-          return (
-            <FontAwesome
-              key={index}
-              name='star'
-              size={20}
-              color={starNumber <= rating ? "#ffa723" : '#707070'}
-              style={tw`mr-1`}
-            />
-          );
-        })}
-      </View>
-    );
-  };
+import { useNavigation } from '@react-navigation/native'
+import CustomStarRating from './starRating';
   
-
 const TechnicianList = ({businessName, category, address, ratings, route}) => {
 
   const navigation = useNavigation()
