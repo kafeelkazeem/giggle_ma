@@ -54,7 +54,7 @@ const SingleTechnician = () => {
           <Card style={tw`bg-white shadow-md rounded-lg p-4`}>
             <Text
               style={[
-                tw`font-bold text-2xl mb-3 text-gray-800`,
+                tw`font-bold text-2xl mb-1 text-gray-800`,
                 { fontFamily: "Lato_Regular" },
               ]}
             >
@@ -62,7 +62,7 @@ const SingleTechnician = () => {
             </Text>
             <Text
               style={[
-                tw`text-base text-gray-700 leading-6`,
+                tw`text-sm text-gray-700 leading-6`,
                 { lineHeight: 22 },
                 isExpanded ? tw`mb-3` : { overflow: "hidden", height: 66 },
               ]}
@@ -77,7 +77,7 @@ const SingleTechnician = () => {
           </Card>
 
           {/* Work Images Card */}
-          <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-1`}>
+          <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-0`}>
             <View style={tw`flex-row flex-wrap justify-between`}>
               {workImages.map((image, index) => (
                 <Image

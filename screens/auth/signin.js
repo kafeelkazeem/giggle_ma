@@ -9,6 +9,7 @@ import axios from 'axios';
 import { ApiUrl } from '../../util/url';
 import * as Yup from 'yup'; 
 import { Formik } from 'formik'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SigninPage = ({ navigation }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -29,6 +30,7 @@ const SigninPage = ({ navigation }) => {
     setLoading(true); 
     try {
       const response = await axios.post(`${ApiUrl}/customerLogin`, formData);
+      await AsyncStorage.setItem('user', JSON.stringify(response.data))
       console.log(response.data);
       navigation.navigate('App');
     } catch (error) {
