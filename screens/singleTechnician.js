@@ -4,7 +4,7 @@ import tw from "twrnc";
 import Pic from "../assets/image/avater.png";
 import { darkBrown, lightBrown } from "../util/colors";
 import Feather from "@expo/vector-icons/Feather";
-import { Card, Divider } from "react-native-paper";
+import { Card } from "react-native-paper";
 import CustomStarRating from "../components/starRating/starRating";
 import BookButton from "../components/buttons/bookButton";
 import StarRatingEdit from "../components/starRating/starRating(edit)";
@@ -12,21 +12,21 @@ import StarRatingEdit from "../components/starRating/starRating(edit)";
 const customerReviews = [
   {
     id: 1,
-    avatarLetter: "A",
+    avatarLetter: "AS",
     name: "Alice Smith",
     review: "Great service! John was punctual and fixed everything perfectly.",
     rating: 5,
   },
   {
     id: 2,
-    avatarLetter: "B",
+    avatarLetter: "BJ",
     name: "Brian Johnson",
     review: "The work was okay, but he arrived late.",
     rating: 3,
   },
   {
     id: 3,
-    avatarLetter: "C",
+    avatarLetter: "CL",
     name: "Cynthia Lee",
     review: "Exceptional professionalism and attention to detail.",
     rating: 4,
@@ -91,16 +91,13 @@ const SingleTechnician = () => {
             </View>
           </Card>
 
+          {/* <Card style={tw`bg-white shadow-md rounded-lg p-4`}>
+            <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`,{ fontFamily: "Lato_Regular" },]}> Socials</Text>
+          </Card> */}
+
           {/* Description Card */}
           <Card style={tw`bg-white shadow-md rounded-lg p-4`}>
-            <Text
-              style={[
-                tw`font-bold text-2xl mb-1 text-gray-800`,
-                { fontFamily: "Lato_Regular" },
-              ]}
-            >
-              Description
-            </Text>
+            <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`,{ fontFamily: "Lato_Regular" },]}>Description</Text>
             <Text
               style={[
                 tw`text-sm text-gray-700 leading-6`,
