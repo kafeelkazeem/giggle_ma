@@ -153,7 +153,7 @@ const SingleTechnician = () => {
           </Card>
 
            {/* Add Review Section */} 
-          <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1`}>
+          <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1 mb-2`}>
             <Text style={tw`text-lg font-semibold mb-2 text-gray-800`}> Leave a Review </Text>
             <StarRatingEdit />
             <TextInput style={tw`border rounded-lg p-2 mb-2 text-gray-700`} placeholder="Your Review" value={newReview.review} onChangeText={(text) => setNewReview({ ...newReview, review: text })}multiline/>
