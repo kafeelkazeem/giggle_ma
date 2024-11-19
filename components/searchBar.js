@@ -7,7 +7,7 @@ const Search = ({ searchQuery, setSearchQuery }) => {
   return (
     <View>
       <Searchbar
-        placeholder="Category"
+        placeholder="Search profession"
         onChangeText={setSearchQuery}
         value={searchQuery}
         mode='bar'

@@ -30,7 +30,7 @@ const HomePage = () => {
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <View style={tw`mt-1 p-2`}>
           <Text style={[tw`font-bold text-3xl tracking-0.3`, { fontFamily: 'Lato_Regular' }]}>
-            Category
+            Profession
           </Text>
         </View>
 
