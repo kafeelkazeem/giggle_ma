@@ -1,12 +1,37 @@
 import React, { useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import tw from "twrnc";
 import Pic from "../assets/image/avater.png";
 import { darkBrown, lightBrown } from "../util/colors";
 import Feather from "@expo/vector-icons/Feather";
-import { Card } from "react-native-paper";
-import CustomStarRating from "../components/starRating";
+import { Card, Divider } from "react-native-paper";
+import CustomStarRating from "../components/starRating/starRating";
 import BookButton from "../components/buttons/bookButton";
+import StarRatingEdit from "../components/starRating/starRating(edit)";
+
+const customerReviews = [
+  {
+    id: 1,
+    avatarLetter: "A",
+    name: "Alice Smith",
+    review: "Great service! John was punctual and fixed everything perfectly.",
+    rating: 5,
+  },
+  {
+    id: 2,
+    avatarLetter: "B",
+    name: "Brian Johnson",
+    review: "The work was okay, but he arrived late.",
+    rating: 3,
+  },
+  {
+    id: 3,
+    avatarLetter: "C",
+    name: "Cynthia Lee",
+    review: "Exceptional professionalism and attention to detail.",
+    rating: 4,
+  },
+];
 
 const SingleTechnician = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -22,6 +47,22 @@ const SingleTechnician = () => {
     require("../assets/image/work5.jpg"),
     require("../assets/image/work6.jpg"),
   ];
+
+  const [newReview, setNewReview] = useState({ name: "", review: "", rating: 0 });
+
+  const handleAddReview = () => {
+    if (newReview.name && newReview.review && newReview.rating) {
+      const newReviewWithId = {
+        ...newReview,
+        id: customerReviews.length + 1,
+        avatarLetter: newReview.name.charAt(0).toUpperCase(),
+      };
+      setCustomerReviews([newReviewWithId, ...customerReviews]);
+      setNewReview({ name: "", review: "", rating: 0 }); // Reset form
+    } else {
+      alert("Please fill out all fields and provide a rating.");
+    }
+  };
 
   return (
     <View style={tw`flex-1`}>
@@ -88,6 +129,37 @@ const SingleTechnician = () => {
                 />
               ))}
             </View>
+          </Card>
+
+          {/* customer review */}
+          <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1`}>
+            <Text style={[tw`font-bold text-2xl mb-4 text-gray-800`, { fontFamily: "Lato_Regular" },]}>Customer Reviews</Text>
+            {customerReviews.map((review) => (
+            <>
+            <View key={review.id} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
+              {/* Avatar */}
+              <View style={tw`w-10 h-10 bg-[${lightBrown}] rounded-full flex items-center justify-center`}>
+                <Text style={tw`text-white font-bold text-lg`}>{review.avatarLetter}</Text>
+              </View>
+              {/* Review Details */}
+              <View style={tw`flex-1`}>
+                <Text style={tw`text-base font-semibold text-gray-800`}>{review.name}</Text>
+                <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
+                <CustomStarRating rating={review.rating} />
+              </View>
+            </View>
+            </>
+            ))}
+          </Card>
+
+           {/* Add Review Section */} 
+          <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1`}>
+            <Text style={tw`text-lg font-semibold mb-2 text-gray-800`}> Leave a Review </Text>
+            <StarRatingEdit />
+            <TextInput style={tw`border rounded-lg p-2 mb-2 text-gray-700`} placeholder="Your Review" value={newReview.review} onChangeText={(text) => setNewReview({ ...newReview, review: text })}multiline/>
+            <TouchableOpacity style={tw`bg-[${darkBrown}] p-3 rounded-lg mt-3`} onPress={handleAddReview}>
+              <Text style={tw`text-white text-center font-semibold`}>Submit Review</Text>
+            </TouchableOpacity>
           </Card>
         </View>
       </ScrollView>

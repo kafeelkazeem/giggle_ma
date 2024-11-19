@@ -5,7 +5,7 @@ import tw from 'twrnc';
 import Pic from '../assets/image/avater.png'
 import Feather from '@expo/vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'
-import CustomStarRating from './starRating';
+import CustomStarRating from './starRating/starRating';
   
 const TechnicianList = ({businessName, category, address, ratings, route}) => {
 
