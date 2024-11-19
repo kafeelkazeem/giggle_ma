@@ -131,7 +131,7 @@ const SingleTechnician = () => {
           {/* customer review */}
           <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1`}>
             <Text style={[tw`font-bold text-2xl mb-4 text-gray-800`, { fontFamily: "Lato_Regular" },]}>Customer Reviews</Text>
-            {customerReviews.map((review) => (
+            {customerReviews.map((review, key) => (
             <>
             <View key={review.id} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
               {/* Avatar */}
