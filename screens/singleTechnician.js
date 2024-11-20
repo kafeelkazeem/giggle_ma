@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import tw from "twrnc";
 import Pic from "../assets/image/avater.png";
@@ -8,6 +8,8 @@ import { Card } from "react-native-paper";
 import CustomStarRating from "../components/starRating/starRating";
 import BookButton from "../components/buttons/bookButton";
 import StarRatingEdit from "../components/starRating/starRating(edit)";
+import axios from "axios";
+import { ApiUrl } from "../util/url";
 
 const customerReviews = [
   {
@@ -33,8 +35,27 @@ const customerReviews = [
   },
 ];
 
-const SingleTechnician = () => {
+const SingleTechnician = ({route}) => {
+  
+  const {technicianId} = route.params
+
   const [isExpanded, setIsExpanded] = useState(false);
+  const [technicianData, setTechnicianData] = useState('')
+
+  useEffect(()=>{
+    const fetchTechnicianData = async () =>{
+      try {
+        const response = await axios.get(`${ApiUrl}/singleTechnician?technicianId=${technicianId}`)
+        setTechnicianData(response.data.singleTechnician)
+        console.log(response.data.singleTechnician)      
+      } catch (error) {
+        console.log(error)
+        alert('an error occured')
+      }
+    }
+    fetchTechnicianData()
+  }, [])
+
 
   const descriptionText = `Reliable Plumbing Solutions is your trusted partner for all plumbing needs, offering top-notch services to residential and commercial clients. From emergency repairs and leak fixes to comprehensive installation and maintenance, our experienced team delivers efficient and reliable solutions tailored to your needs.`;
 
@@ -48,20 +69,11 @@ const SingleTechnician = () => {
     require("../assets/image/work6.jpg"),
   ];
 
-  const [newReview, setNewReview] = useState({ name: "", review: "", rating: 0 });
+  const [reviewRating, setReviewRating] = useState(1)
+  const [review, setReview] = useState('')
 
   const handleAddReview = () => {
-    if (newReview.name && newReview.review && newReview.rating) {
-      const newReviewWithId = {
-        ...newReview,
-        id: customerReviews.length + 1,
-        avatarLetter: newReview.name.charAt(0).toUpperCase(),
-      };
-      setCustomerReviews([newReviewWithId, ...customerReviews]);
-      setNewReview({ name: "", review: "", rating: 0 }); // Reset form
-    } else {
-      alert("Please fill out all fields and provide a rating.");
-    }
+    
   };
 
   return (
@@ -152,8 +164,8 @@ const SingleTechnician = () => {
            {/* Add Review Section */} 
           <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1 mb-2`}>
             <Text style={tw`text-lg font-semibold mb-2 text-gray-800`}> Leave a Review </Text>
-            <StarRatingEdit />
-            <TextInput style={tw`border rounded-lg p-2 mb-2 text-gray-700`} placeholder="Your Review" value={newReview.review} onChangeText={(text) => setNewReview({ ...newReview, review: text })}multiline/>
+            <StarRatingEdit onRatingChange={(rating) => setReviewRating(rating)} />
+            <TextInput style={tw`border rounded-lg p-2 mb-2 text-gray-700`} placeholder="Your Review" value={review} onChangeText={(text) => setReview(text)}multiline/>
             <TouchableOpacity style={tw`bg-[${darkBrown}] p-3 rounded-lg mt-3`} onPress={handleAddReview}>
               <Text style={tw`text-white text-center font-semibold`}>Submit Review</Text>
             </TouchableOpacity>

@@ -7,12 +7,12 @@ import Feather from '@expo/vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'
 import CustomStarRating from './starRating/starRating';
   
-const TechnicianList = ({businessName, category, address, ratings, route}) => {
+const TechnicianList = ({id, businessName, category, address, ratings, route}) => {
 
   const navigation = useNavigation()
 
   const onView = () =>{
-    navigation.navigate(route)
+    navigation.navigate(route, {technicianId: id})
   }
 
   return (
