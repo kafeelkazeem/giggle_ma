@@ -133,7 +133,7 @@ const SingleTechnician = () => {
             <Text style={[tw`font-bold text-2xl mb-4 text-gray-800`, { fontFamily: "Lato_Regular" },]}>Customer Reviews</Text>
             {customerReviews.map((review, key) => (
             <>
-            <View key={review.id} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
+            <View key={key} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
               {/* Avatar */}
               <View style={tw`w-10 h-10 bg-[${lightBrown}] rounded-full flex items-center justify-center`}>
                 <Text style={tw`text-white font-bold text-lg`}>{review.avatarLetter}</Text>
