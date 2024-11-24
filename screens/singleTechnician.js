@@ -10,30 +10,8 @@ import BookButton from "../components/buttons/bookButton";
 import StarRatingEdit from "../components/starRating/starRating(edit)";
 import axios from "axios";
 import { ApiUrl } from "../util/url";
-
-const customerReviews = [
-  {
-    id: 1,
-    avatarLetter: "AS",
-    name: "Alice Smith",
-    review: "Great service! John was punctual and fixed everything perfectly.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    avatarLetter: "BJ",
-    name: "Brian Johnson",
-    review: "The work was okay, but he arrived late.",
-    rating: 3,
-  },
-  {
-    id: 3,
-    avatarLetter: "CL",
-    name: "Cynthia Lee",
-    review: "Exceptional professionalism and attention to detail.",
-    rating: 4,
-  },
-];
+import { getInitials } from "../util/helpers";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SingleTechnician = ({route}) => {
   
@@ -41,6 +19,22 @@ const SingleTechnician = ({route}) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [technicianData, setTechnicianData] = useState('')
+  const [customerReviews, setCustomerReviews] = useState([])
+
+  const [reviewRating, setReviewRating] = useState(0)
+  const [review, setReview] = useState('')
+  
+  const descriptionText = `Reliable Plumbing Solutions is your trusted partner for all plumbing needs, offering top-notch services to residential and commercial clients. From emergency repairs and leak fixes to comprehensive installation and maintenance, our experienced team delivers efficient and reliable solutions tailored to your needs.`;
+
+  // Sample images for the technician's past work
+  const workImages = [
+    require("../assets/image/work1.jpg"),
+    require("../assets/image/work2.jpg"),
+    require("../assets/image/work3.jpg"),
+    require("../assets/image/work4.jpg"),
+    require("../assets/image/work5.jpg"),
+    require("../assets/image/work6.jpg"),
+  ];
 
   useEffect(()=>{
     const fetchTechnicianData = async () =>{
@@ -56,24 +50,39 @@ const SingleTechnician = ({route}) => {
     fetchTechnicianData()
   }, [])
 
+  useEffect(()=>{
+    const fetchReviews = async () =>{
+      try {
+        const response = await axios.get(`${ApiUrl}/getReview?technicianId=${technicianId}`)
+        setCustomerReviews(response.data.reviews)
+        console.log(response.data.reviews)
+      } catch (error) {
+        console.log(error)
+        alert('an error occured')
+      }
+    }
+    fetchReviews()
+  }, [])
 
-  const descriptionText = `Reliable Plumbing Solutions is your trusted partner for all plumbing needs, offering top-notch services to residential and commercial clients. From emergency repairs and leak fixes to comprehensive installation and maintenance, our experienced team delivers efficient and reliable solutions tailored to your needs.`;
-
-  // Sample images for the technician's past work
-  const workImages = [
-    require("../assets/image/work1.jpg"),
-    require("../assets/image/work2.jpg"),
-    require("../assets/image/work3.jpg"),
-    require("../assets/image/work4.jpg"),
-    require("../assets/image/work5.jpg"),
-    require("../assets/image/work6.jpg"),
-  ];
-
-  const [reviewRating, setReviewRating] = useState(1)
-  const [review, setReview] = useState('')
-
-  const handleAddReview = () => {
-    
+  const handleAddReview = async () => {
+    if(review === `` && reviewRating <= 0){
+      return alert('please rate and review')
+    }
+    try {
+      let customerId;
+      const userData = await AsyncStorage.getItem('user')
+      if (userData) {
+        const user = JSON.parse(userData);
+        customerId = user.customer._id;
+      }
+      const formData = {technicianId: technicianId, customerId: customerId, rating: reviewRating, review: review}
+      const response = await axios.post(`${ApiUrl}/leaveReview`, formData)
+      console.log(response.data)
+      alert('submitted')
+    } catch (error) {
+      console.log(error)
+      alert('An error occured')
+    }
   };
 
   return (
@@ -89,16 +98,16 @@ const SingleTechnician = ({route}) => {
               />
               <View style={tw`flex-1 flex-col gap-2`}>
                 <Text style={tw`text-2xl font-semibold text-gray-900`}>
-                  John Doe
+                  {technicianData.businessName}
                 </Text>
-                <Text style={tw`text-base text-gray-600`}>Electrician</Text>
+                <Text style={tw`text-base text-gray-600`}>{technicianData.category}</Text>
                 <View style={tw`flex-row items-center gap-1`}>
                   <Feather name="map-pin" size={18} color={lightBrown} />
                   <Text style={tw`text-sm text-gray-500`}>
-                    San Francisco, CA
+                    {technicianData.address}
                   </Text>
                 </View>
-                <CustomStarRating rating={3} />
+                <CustomStarRating rating={technicianData.ratings} />
               </View>
             </View>
           </Card>
@@ -117,7 +126,7 @@ const SingleTechnician = ({route}) => {
                 isExpanded ? tw`mb-3` : { overflow: "hidden", height: 66 },
               ]}
             >
-              {descriptionText}
+              {technicianData.description ? technicianData.description : descriptionText}
             </Text>
             <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
               <Text style={tw`text-sm text-[${darkBrown}] font-semibold`}>
@@ -140,25 +149,27 @@ const SingleTechnician = ({route}) => {
             </View>
           </Card>
 
-          {/* customer review */}
+          {/* Customer Reviews */}
           <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1`}>
-            <Text style={[tw`font-bold text-2xl mb-4 text-gray-800`, { fontFamily: "Lato_Regular" },]}>Customer Reviews</Text>
-            {customerReviews.map((review, key) => (
-            <>
-            <View key={key} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
-              {/* Avatar */}
-              <View style={tw`w-10 h-10 bg-[${lightBrown}] rounded-full flex items-center justify-center`}>
-                <Text style={tw`text-white font-bold text-lg`}>{review.avatarLetter}</Text>
-              </View>
-              {/* Review Details */}
-              <View style={tw`flex-1`}>
-                <Text style={tw`text-base font-semibold text-gray-800`}>{review.name}</Text>
-                <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
-                <CustomStarRating rating={review.rating} />
-              </View>
-            </View>
-            </>
-            ))}
+            <Text style={[tw`font-bold text-2xl mb-4 text-gray-800`,{ fontFamily: "Lato_Regular" },]}>Customer Reviews</Text>
+            {customerReviews.length > 0 ? (
+              customerReviews.map((review, key) => (
+                <View key={key} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
+                  {/* Avatar */}
+                  <View style={tw`w-10 h-10 bg-[${lightBrown}] rounded-full flex items-center justify-center`}>
+                    <Text style={tw`text-white font-bold text-lg`}>{getInitials(review.customer.fullName)}</Text>
+                  </View>
+                  {/* Review Details */}
+                  <View style={tw`flex-1`}>
+                    <Text style={tw`text-base font-semibold text-gray-800`}>{review.customer.fullName}</Text>
+                    <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
+                    <CustomStarRating rating={review.rating} />
+                  </View>
+                </View>
+              ))
+            ) : (
+              <Text style={tw`text-gray-500 text-center my-4`}>No reviews available.</Text>
+            )}
           </Card>
 
            {/* Add Review Section */} 
