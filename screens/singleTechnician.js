@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, TextInput, ActivityIndicator } from "react-native";
 import tw from "twrnc";
 import Pic from "../assets/image/avater.png";
 import { darkBrown, lightBrown } from "../util/colors";
@@ -23,6 +23,10 @@ const SingleTechnician = ({route}) => {
 
   const [reviewRating, setReviewRating] = useState(0)
   const [review, setReview] = useState('')
+
+  const [loading, setLoading] = useState(false)
+  const [loadingReview, setLoadingReview] = useState(false)
+  const [submitReviewLoading, setSubmitReviewLoading] = useState(false)
   
   const descriptionText = `Reliable Plumbing Solutions is your trusted partner for all plumbing needs, offering top-notch services to residential and commercial clients. From emergency repairs and leak fixes to comprehensive installation and maintenance, our experienced team delivers efficient and reliable solutions tailored to your needs.`;
 
@@ -37,36 +41,46 @@ const SingleTechnician = ({route}) => {
   ];
 
   useEffect(()=>{
+    setLoading(true)
     const fetchTechnicianData = async () =>{
       try {
         const response = await axios.get(`${ApiUrl}/singleTechnician?technicianId=${technicianId}`)
         setTechnicianData(response.data.singleTechnician)
-        console.log(response.data.singleTechnician)      
+        console.log(response.data.singleTechnician)
+        setLoading(false)      
       } catch (error) {
         console.log(error)
         alert('an error occured')
+      }finally{
+        setLoading(false)
       }
     }
     fetchTechnicianData()
   }, [])
 
   useEffect(()=>{
+    setLoadingReview(true)
     const fetchReviews = async () =>{
       try {
         const response = await axios.get(`${ApiUrl}/getReview?technicianId=${technicianId}`)
         setCustomerReviews(response.data.reviews)
         console.log(response.data.reviews)
+        setLoadingReview(false)
       } catch (error) {
         console.log(error)
         alert('an error occured')
+      }finally{
+        setLoadingReview(false)
       }
     }
     fetchReviews()
   }, [])
 
   const handleAddReview = async () => {
+    setSubmitReviewLoading(true)
     if(review === `` && reviewRating <= 0){
-      return alert('please rate and review')
+      setSubmitReviewLoading(false)
+      return alert('please leave a rating and review')
     }
     try {
       let customerId;
@@ -79,11 +93,24 @@ const SingleTechnician = ({route}) => {
       const response = await axios.post(`${ApiUrl}/leaveReview`, formData)
       console.log(response.data)
       alert('submitted')
+      setSubmitReviewLoading(false)
     } catch (error) {
       console.log(error)
       alert('An error occured')
+    }finally{
+      setSubmitReviewLoading(false)
     }
   };
+
+  // Show a loading indicator while data is being fetched
+  if (loading) {
+    return (
+      <View style={tw`flex-1 justify-center items-center`}>
+        <ActivityIndicator size="large" color={darkBrown} />
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={tw`flex-1`}>
@@ -152,6 +179,13 @@ const SingleTechnician = ({route}) => {
           {/* Customer Reviews */}
           <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1`}>
             <Text style={[tw`font-bold text-2xl mb-4 text-gray-800`,{ fontFamily: "Lato_Regular" },]}>Customer Reviews</Text>
+            { loadingReview ?  (
+                <View style={tw`flex-1 justify-center items-center`}>
+                  <ActivityIndicator size={25} color={darkBrown} />
+                  <Text style={tw`mt-1`}>Loading reviews...</Text>
+                </View>
+            ) : (
+            <>
             {customerReviews.length > 0 ? (
               customerReviews.map((review, key) => (
                 <View key={key} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
@@ -170,6 +204,8 @@ const SingleTechnician = ({route}) => {
             ) : (
               <Text style={tw`text-gray-500 text-center my-4`}>No reviews available.</Text>
             )}
+            </>
+          )}
           </Card>
 
            {/* Add Review Section */} 
@@ -177,8 +213,8 @@ const SingleTechnician = ({route}) => {
             <Text style={tw`text-lg font-semibold mb-2 text-gray-800`}> Leave a Review </Text>
             <StarRatingEdit onRatingChange={(rating) => setReviewRating(rating)} />
             <TextInput style={tw`border rounded-lg p-2 mb-2 text-gray-700`} placeholder="Your Review" value={review} onChangeText={(text) => setReview(text)}multiline/>
-            <TouchableOpacity style={tw`bg-[${darkBrown}] p-3 rounded-lg mt-3`} onPress={handleAddReview}>
-              <Text style={tw`text-white text-center font-semibold`}>Submit Review</Text>
+            <TouchableOpacity style={tw`bg-[${darkBrown}] p-3 rounded-lg mt-3`} onPress={handleAddReview} disabled={submitReviewLoading}>
+              {submitReviewLoading ? <ActivityIndicator size={25} color="#fff" /> :   (<Text style={tw`text-white text-center font-semibold`}>Submit Review</Text>)}
             </TouchableOpacity>
           </Card>
         </View>
