@@ -1,28 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Callout, Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import tw from 'twrnc';
 import { Picker } from '@react-native-picker/picker';
-import { Ionicons } from '@expo/vector-icons'; // Icon for dropdown
-import { darkBrown, lightGreen } from '../util/colors';
 import { ApiUrl } from '../util/url';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native'
 
 const MapScreen = () => {
+
+  const navigation = useNavigation()
+
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('All'); // State for selected technician
   const [filteredMarkers, setFilteredMarkers] = useState([]);
   const [technicians, setTechnicians] = useState([])
-
-  // // Mock data for service providers
-  // const serviceProviders = [
-  //   { id: 1, type: 'Tailor', latitude: 12.002179, longitude: 8.591956, title: 'Service Provider 1' },
-  //   { id: 2, type: 'Carpenter', latitude: 12.0261093, longitude: 8.5857369, title: 'Service Provider 2' },
-  //   { id: 3, type: 'Electrician', latitude: 12.015345, longitude: 8.588789, title: 'Service Provider 3' },
-  //   { id: 4, type: 'Painter', latitude: 12.008764, longitude: 8.591467, title: 'Service Provider 4' },
-  // ];
 
   useEffect(() => {
     (async () => {
@@ -102,9 +96,14 @@ const MapScreen = () => {
           <Marker
             key={marker._id}
             coordinate={{ latitude: marker.latitude, longitude: marker.longitude }}
-            title={marker.businessName}
-            description={marker.category}
-          />
+          >
+            <Callout onPress={() => navigation.navigate('singleTechnician', {technicianId: marker._id})}>
+              <View style={tw`flex flex-col`}>
+                <Text>{marker.businessName}</Text>
+                <Text>{marker.category}</Text>
+              </View>
+            </Callout>
+          </Marker>
         ))}
       </MapView>
     </View>
