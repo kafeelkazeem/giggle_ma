@@ -50,7 +50,6 @@ const SigninPage = ({ navigation }) => {
       <ScrollView contentContainerStyle={tw`flex-grow justify-center`} keyboardShouldPersistTaps="handled">
         <View style={[tw`p-4`]}>
           <Text style={[tw`text-2xl font-bold text-left mb-6`, { fontFamily: 'Lato_Regular' }]}>Login</Text>
-
           <Formik
             initialValues={{ email: '', password: '' }}
             validationSchema={validationSchema}

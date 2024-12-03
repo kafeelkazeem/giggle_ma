@@ -134,7 +134,7 @@ const SingleTechnician = ({route}) => {
                     {technicianData.address}
                   </Text>
                 </View>
-                <CustomStarRating rating={technicianData.ratings} />
+                <CustomStarRating rating={technicianData.avgRatings} />
               </View>
             </View>
           </Card>
