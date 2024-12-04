@@ -23,10 +23,11 @@ const SingleTechnician = ({route}) => {
 
   const [reviewRating, setReviewRating] = useState(0)
   const [review, setReview] = useState('')
+  const[submitReviewLoading, setSubmitReviewLoading] = useState(false)
+  const [submitCnt, setSubmitCnt] = useState(0)
 
   const [loading, setLoading] = useState(false)
   const [loadingReview, setLoadingReview] = useState(false)
-  const [submitReviewLoading, setSubmitReviewLoading] = useState(false)
 
   
   const descriptionText = `Reliable Plumbing Solutions is your trusted partner for all plumbing needs, offering top-notch services to residential and commercial clients. From emergency repairs and leak fixes to comprehensive installation and maintenance, our experienced team delivers efficient and reliable solutions tailored to your needs.`;
@@ -75,7 +76,7 @@ const SingleTechnician = ({route}) => {
       }
     }
     fetchReviews()
-  }, [])
+  }, [submitCnt])
 
   const handleAddReview = async () => {
     const token = await fetchToken()
@@ -97,6 +98,8 @@ const SingleTechnician = ({route}) => {
           'Authorization': `${token}`,
         },
       })
+      setSubmitCnt((prevCount) => prevCount + 1)
+      setReview('')
       console.log(response.data)
       alert('submitted')
       setSubmitReviewLoading(false)
