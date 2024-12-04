@@ -30,8 +30,8 @@ const SigninPage = ({ navigation }) => {
     setLoading(true); 
     try {
       const response = await axios.post(`${ApiUrl}/customerLogin`, formData);
-      await AsyncStorage.setItem('user', JSON.stringify(response.data))
       console.log(response.data);
+      await AsyncStorage.setItem('user', JSON.stringify(response.data))
       navigation.navigate('App');
     } catch (error) {
       console.log(error);

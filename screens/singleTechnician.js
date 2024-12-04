@@ -10,7 +10,7 @@ import BookButton from "../components/buttons/bookButton";
 import StarRatingEdit from "../components/starRating/starRating(edit)";
 import axios from "axios";
 import { ApiUrl } from "../util/url";
-import { getInitials } from "../util/helpers";
+import { fetchToken, getInitials } from "../util/helpers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const SingleTechnician = ({route}) => {
@@ -27,6 +27,7 @@ const SingleTechnician = ({route}) => {
   const [loading, setLoading] = useState(false)
   const [loadingReview, setLoadingReview] = useState(false)
   const [submitReviewLoading, setSubmitReviewLoading] = useState(false)
+
   
   const descriptionText = `Reliable Plumbing Solutions is your trusted partner for all plumbing needs, offering top-notch services to residential and commercial clients. From emergency repairs and leak fixes to comprehensive installation and maintenance, our experienced team delivers efficient and reliable solutions tailored to your needs.`;
 
@@ -77,6 +78,7 @@ const SingleTechnician = ({route}) => {
   }, [])
 
   const handleAddReview = async () => {
+    const token = await fetchToken()
     setSubmitReviewLoading(true)
     if(review === `` && reviewRating <= 0){
       setSubmitReviewLoading(false)
@@ -90,7 +92,11 @@ const SingleTechnician = ({route}) => {
         customerId = user.customer._id;
       }
       const formData = {technicianId: technicianId, customerId: customerId, rating: reviewRating, review: review}
-      const response = await axios.post(`${ApiUrl}/leaveReview`, formData)
+      const response = await axios.post(`${ApiUrl}/leaveReview`, formData, {
+        headers : {
+          'Authorization': `${token}`,
+        },
+      })
       console.log(response.data)
       alert('submitted')
       setSubmitReviewLoading(false)
