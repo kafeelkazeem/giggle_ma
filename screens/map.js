@@ -99,7 +99,7 @@ const MapScreen = () => {
           >
             <Callout onPress={() => navigation.navigate('singleTechnician', {technicianId: marker._id})}>
               <View style={tw`flex flex-col`}>
-                <Text>{marker.businessName}</Text>
+                <Text style={tw`font-bold`}>{marker.businessName}</Text>
                 <Text>{marker.category}</Text>
               </View>
             </Callout>

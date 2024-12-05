@@ -14,6 +14,7 @@ import { fetchToken, getInitials } from "../util/helpers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
+import moment from "moment";
 
 const SingleTechnician = ({route}) => {
   
@@ -208,7 +209,10 @@ const SingleTechnician = ({route}) => {
                   </View>
                   {/* Review Details */}
                   <View style={tw`flex-1`}>
-                    <Text style={tw`text-base font-semibold text-gray-800`}>{review.customer.fullName}</Text>
+                    <View style={tw`flex flex-row w-full justify-between items-center`}>
+                      <Text style={tw`text-base font-semibold text-gray-800`}>{review.customer.fullName}</Text>
+                      <Text style={tw`text-sm text-gray-700`}>{moment(review.createdAt).format('DD/MM/YY')}</Text>
+                    </View>
                     <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
                     <CustomStarRating rating={review.rating} />
                   </View>
