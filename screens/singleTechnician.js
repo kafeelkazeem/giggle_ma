@@ -12,9 +12,13 @@ import axios from "axios";
 import { ApiUrl } from "../util/url";
 import { fetchToken, getInitials } from "../util/helpers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AntDesign from '@expo/vector-icons/AntDesign';
+import { useNavigation } from "@react-navigation/native";
 
 const SingleTechnician = ({route}) => {
   
+  const navigation = useNavigation()
+
   const {technicianId} = route.params
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -196,7 +200,7 @@ const SingleTechnician = ({route}) => {
             ) : (
             <>
             {customerReviews.length > 0 ? (
-              customerReviews.map((review, key) => (
+              customerReviews.slice(0, 4).map((review, key) => (
                 <View key={key} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
                   {/* Avatar */}
                   <View style={tw`w-10 h-10 bg-[${lightBrown}] rounded-full flex items-center justify-center`}>
@@ -215,6 +219,10 @@ const SingleTechnician = ({route}) => {
             )}
             </>
           )}
+            {customerReviews.length > 0 && 
+              <TouchableOpacity onPress={() => navigation.navigate('reviews', {customerReviews: customerReviews, businessName: technicianData.businessName})} style={tw`flex flex-row justify-end gap-1 my-2`}>
+                <Text style={tw`text-right text-[${darkBrown}] text-sm`}>See all reviews</Text><AntDesign name="arrowright" size={20} color={darkBrown} />
+              </TouchableOpacity>}
           </Card>
 
            {/* Add Review Section */} 
@@ -223,7 +231,7 @@ const SingleTechnician = ({route}) => {
             <StarRatingEdit onRatingChange={(rating) => setReviewRating(rating)} />
             <TextInput style={tw`border rounded-lg p-2 mb-2 text-gray-700`} placeholder="Your Review" value={review} onChangeText={(text) => setReview(text)}multiline/>
             <TouchableOpacity style={tw`bg-[${darkBrown}] p-3 rounded-lg mt-3`} onPress={handleAddReview} disabled={submitReviewLoading}>
-              {submitReviewLoading ? <ActivityIndicator size={25} color="#fff" /> :   (<Text style={tw`text-white text-center font-semibold`}>Submit Review</Text>)}
+              {submitReviewLoading ? <ActivityIndicator size={25} color="#fff" /> :  (<Text style={tw`text-white text-center font-semibold`}>Submit Review</Text>)}
             </TouchableOpacity>
           </Card>
         </View>

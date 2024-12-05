@@ -10,6 +10,7 @@ import SigninPage from './screens/auth/signin';
 import BottomNav from './layouts/bottomNav';
 import SelectedCategory from './screens/selectedCategory';
 import SingleTechnician from './screens/singleTechnician';
+import Reviews from './screens/reviews';
 
 const customTheme = {
   ...DefaultTheme,
@@ -44,6 +45,7 @@ export default function App() {
           <Stack.Screen name='App' component={BottomNav} options={{headerShown: false}} />
           <Stack.Screen name='selectedCategory' component={SelectedCategory} options={{headerTitleStyle: {color: white }, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white, headerShown: true}} />
           <Stack.Screen name='singleTechnician' component={SingleTechnician} options={{title: '', headerTitleStyle: {color: white }, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white, headerShown: true}} />
+          <Stack.Screen name='reviews' component={Reviews} options={{headerTitleStyle: {color: white }, headerStyle: {backgroundColor: darkBrown}, headerTintColor: white, headerShown: true}} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
