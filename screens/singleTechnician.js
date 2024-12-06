@@ -10,8 +10,7 @@ import BookButton from "../components/buttons/bookButton";
 import StarRatingEdit from "../components/starRating/starRating(edit)";
 import axios from "axios";
 import { ApiUrl } from "../util/url";
-import { fetchToken, getInitials } from "../util/helpers";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { fetchCustomerId, fetchToken, getInitials } from "../util/helpers";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
 import moment from "moment";
@@ -21,6 +20,7 @@ const SingleTechnician = ({route}) => {
   const navigation = useNavigation()
 
   const {technicianId} = route.params
+  const [customerId, setCustomerId] = useState('')
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [technicianData, setTechnicianData] = useState('')
@@ -46,6 +46,13 @@ const SingleTechnician = ({route}) => {
     require("../assets/image/work5.jpg"),
     require("../assets/image/work6.jpg"),
   ];
+
+  useEffect(()=>{
+    const func = async () =>{
+      setCustomerId(await fetchCustomerId())
+    }
+    func()
+  }, [])
 
   useEffect(()=>{
     setLoading(true)
@@ -91,12 +98,6 @@ const SingleTechnician = ({route}) => {
       return alert('please leave a rating and review')
     }
     try {
-      let customerId;
-      const userData = await AsyncStorage.getItem('user')
-      if (userData) {
-        const user = JSON.parse(userData);
-        customerId = user.customer._id;
-      }
       const formData = {technicianId: technicianId, customerId: customerId, rating: reviewRating, review: review}
       const response = await axios.post(`${ApiUrl}/leaveReview`, formData, {
         headers : {

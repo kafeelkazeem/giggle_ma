@@ -20,3 +20,15 @@ export const fetchToken = async () => {
     console.error('Error fetching user data:', error);
   }
 };
+
+export const fetchCustomerId = async () => {
+  try {
+    const userData = await AsyncStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+      return user.customer._id
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+  }
+}
