@@ -4,7 +4,7 @@ import tw from "twrnc";
 import Pic from "../assets/image/avater.png";
 import { darkBrown, lightBrown } from "../util/colors";
 import Feather from "@expo/vector-icons/Feather";
-import { Card } from "react-native-paper";
+import { Card, Divider } from "react-native-paper";
 import CustomStarRating from "../components/starRating/starRating";
 import BookButton from "../components/buttons/bookButton";
 import StarRatingEdit from "../components/starRating/starRating(edit)";
@@ -214,16 +214,15 @@ const SingleTechnician = ({route}) => {
                   <View style={tw`flex-1`}>
                     <View style={tw`flex flex-row w-full justify-between items-center`}>
                       <Text style={tw`text-base font-semibold text-gray-800`}>{review.customer.fullName}</Text>
-                      <ReviewMenu />
+                      {customerId == review.customer._id && <ReviewMenu />}
                     </View>
                     <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
                     <View style={tw`flex flex-row w-full justify-between items-center`}>
                       <CustomStarRating rating={review.rating} />
+                      <Text style={tw`text-sm text-[#8a817c]`}>{moment(review.createdAt).format('DD/MM/YY')}</Text>
                     </View>
                   </View>
-                </View>
-                <View style={tw`w-full flex flex-row justify-end`}>
-                  <Text style={tw`text-sm text-gray-700`}>{moment(review.createdAt).format('DD/MM/YY')}</Text>
+                  <Divider bold={true} />
                 </View>
                 </>
               ))
