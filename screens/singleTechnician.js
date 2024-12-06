@@ -118,6 +118,23 @@ const SingleTechnician = ({route}) => {
     }
   };
 
+  const onDeleteReview = async (arr=[], reviewId) =>{
+    const token = await fetchToken()
+    try {
+      const formData = {customerIdId: customerId, reviewId: reviewId}
+      const response = await axios.delete(`${ApiUrl}/deleteReview`, formData, {
+        headers : {
+          'Authorization': `${token}`,
+        },
+      })
+      console.log(response.data)
+      arr.filter((i) => i.reviewId == reviewId)
+    } catch (error) {
+      console.log(error)
+      alert('An error occured')
+    }
+  }
+
   // Show a loading indicator while data is being fetched
   if (loading) {
     return (
