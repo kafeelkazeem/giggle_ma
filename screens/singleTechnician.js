@@ -14,6 +14,7 @@ import { fetchCustomerId, fetchToken, getInitials } from "../util/helpers";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
 import moment from "moment";
+import ReviewMenu from "../components/reviewMenu";
 
 const SingleTechnician = ({route}) => {
   
@@ -202,7 +203,8 @@ const SingleTechnician = ({route}) => {
             ) : (
             <>
             {customerReviews.length > 0 ? (
-              customerReviews.slice(0, 4).map((review, key) => (
+              customerReviews.reverse().slice(0, 4).map((review, key) => (
+                <>
                 <View key={key} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
                   {/* Avatar */}
                   <View style={tw`w-10 h-10 bg-[${lightBrown}] rounded-full flex items-center justify-center`}>
@@ -212,12 +214,18 @@ const SingleTechnician = ({route}) => {
                   <View style={tw`flex-1`}>
                     <View style={tw`flex flex-row w-full justify-between items-center`}>
                       <Text style={tw`text-base font-semibold text-gray-800`}>{review.customer.fullName}</Text>
-                      <Text style={tw`text-sm text-gray-700`}>{moment(review.createdAt).format('DD/MM/YY')}</Text>
+                      <ReviewMenu />
                     </View>
                     <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
-                    <CustomStarRating rating={review.rating} />
+                    <View style={tw`flex flex-row w-full justify-between items-center`}>
+                      <CustomStarRating rating={review.rating} />
+                    </View>
                   </View>
                 </View>
+                <View style={tw`w-full flex flex-row justify-end`}>
+                  <Text style={tw`text-sm text-gray-700`}>{moment(review.createdAt).format('DD/MM/YY')}</Text>
+                </View>
+                </>
               ))
             ) : (
               <Text style={tw`text-gray-500 text-center my-4`}>No reviews available.</Text>
