@@ -50,7 +50,7 @@ const AppBar = () => {
         <Avatar.Text
           size={40}
           label={getInitials(name)} // Get initials from name
-          style={tw`bg-[purple]`}
+          style={tw`bg-[#086788]`}
         />
       </Appbar.Header>
     </View>
