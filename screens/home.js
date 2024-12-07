@@ -6,6 +6,7 @@ import Search from '../components/searchBar';
 import { categories } from '../util/categories';
 import Electrician from '../assets/svg/categories/electrician.svg';
 import { useNavigation } from '@react-navigation/native';
+import { Divider } from 'react-native-paper';
 
 const HomePage = () => {
   
@@ -28,12 +29,12 @@ const HomePage = () => {
       <View style={tw`flex-1 p-3 pt-3`}>
         {/* Pass the searchQuery and setSearchQuery to the Search component */}
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <View style={tw`mt-1 p-2`}>
+        <View style={tw`my-1 p-2 `}>
           <Text style={[tw`font-bold text-3xl tracking-0.3`, { fontFamily: 'Lato_Regular' }]}>
-            Profession
+            Professions
           </Text>
         </View>
-
+        <Divider style={tw`mb-1`} bold={true} />
         {/* Display fallback text if no category is found */}
         {filteredCategories.length === 0 ? (
           <View style={tw`flex-1 justify-center items-center`}>
@@ -45,6 +46,7 @@ const HomePage = () => {
           <FlatList
             data={filteredCategories}
             keyExtractor={(item, index) => index.toString()}
+            style={tw`-mb-3 -mt-1`}
             numColumns={3}
             renderItem={({ item }) => (
               <TouchableOpacity
