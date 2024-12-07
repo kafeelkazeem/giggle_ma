@@ -16,7 +16,7 @@ const ReviewMenu = ({onPress}) => {
         <Menu 
         visible={visible}
         onDismiss={closeMenu}
-        anchor={<Button onPress={openMenu}><Entypo name="dots-three-vertical" size={18} color="black" /></Button>}>
+        anchor={<Button onPress={openMenu}><Entypo name="dots-three-vertical" size={18} color='black' /></Button>}>
             <Menu.Item onPress={onPress} style={tw`h-5  flex justify-center items-center`} title={<Text style={tw`text-[red] text-center`}>Delete <AntDesign name="delete" size={16} color="red" /></Text>} />
         </Menu>
     </View>

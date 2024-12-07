@@ -121,14 +121,14 @@ const SingleTechnician = ({route}) => {
   const onDeleteReview = async (arr=[], reviewId) =>{
     const token = await fetchToken()
     try {
-      const formData = {customerIdId: customerId, reviewId: reviewId}
-      const response = await axios.delete(`${ApiUrl}/deleteReview`, formData, {
+      const formData = {customerId: customerId, reviewId: reviewId}
+      const response = await axios.delete(`${ApiUrl}/deleteReview`, {params: formData}, {
         headers : {
           'Authorization': `${token}`,
         },
       })
       console.log(response.data)
-      arr.filter((i) => i.reviewId == reviewId)
+      setCustomerReviews(arr.filter((i) => i._id !== reviewId))
     } catch (error) {
       console.log(error)
       alert('An error occured')
@@ -220,7 +220,7 @@ const SingleTechnician = ({route}) => {
             ) : (
             <>
             {customerReviews.length > 0 ? (
-              customerReviews.reverse().slice(0, 4).map((review, key) => (
+              customerReviews.slice(0, 4).map((review, key) => (
                 <>
                 <View key={key} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
                   {/* Avatar */}
@@ -231,7 +231,7 @@ const SingleTechnician = ({route}) => {
                   <View style={tw`flex-1`}>
                     <View style={tw`flex flex-row w-full justify-between items-center`}>
                       <Text style={tw`text-base font-semibold text-gray-800`}>{review.customer.fullName}</Text>
-                      {customerId == review.customer._id && <ReviewMenu />}
+                      {customerId == review.customer._id && <ReviewMenu onPress={() => onDeleteReview(customerReviews, review._id)}  />}
                     </View>
                     <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
                     <View style={tw`flex flex-row w-full justify-between items-center`}>
@@ -239,7 +239,6 @@ const SingleTechnician = ({route}) => {
                       <Text style={tw`text-sm text-[#8a817c]`}>{moment(review.createdAt).format('DD/MM/YY')}</Text>
                     </View>
                   </View>
-                  <Divider bold={true} />
                 </View>
                 </>
               ))
