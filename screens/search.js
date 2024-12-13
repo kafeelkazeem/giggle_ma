@@ -1,19 +1,40 @@
 import React, { useState } from "react";
-import { Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { Appbar, Divider, Searchbar } from "react-native-paper";
 import tw from 'twrnc';
 import { darkBrown, lightBrown } from "../util/colors";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import TheSearch from '../assets/svg/search.svg'
+import TechnicianList from "../components/technicianList";
+import { ApiUrl } from "../util/url";
+import axios from "axios";
+import { fetchToken } from "../util/helpers";
 
 const SearchPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResult, setSearchResult] = useState(null)
+  const [loading, setLoading] = useState(false)
 
-  const onChangeSearch = query => setSearchQuery(query);
-
-  const handleSearch = () => {
-    console.log("Search for:", searchQuery);
-    // Add your search logic here, e.g., filtering technicians by name, state, address, etc.
+  const handleSearch = async () => {
+    if(searchQuery === ''){
+      return alert('Input your search')
+    }
+    setLoading(true)
+    try {
+      const token = await fetchToken()
+      const response = await axios.get(`${ApiUrl}/search?searchQuery=${searchQuery}`, {
+        headers : {
+          'Authorization': `${token}`,
+        },
+      })
+      setSearchResult(response.data.technicians)
+      setLoading(false)
+    } catch (error) {
+      alert('An error occured')
+      console.log(error)
+    }finally{
+      setLoading(false)
+    }
   };
 
   return (
@@ -30,18 +51,41 @@ const SearchPage = () => {
           onChangeText={setSearchQuery}
           value={searchQuery}
           mode='bar'
-          onSubmitEditing={() => alert('ih')}
+          onSubmitEditing={handleSearch}
           theme={{ colors: { primary: lightBrown, placeholder: 'grey' } }}  
           style={[tw`border py-1`,{backgroundColor: "rgba(221, 161, 94, 0.2)", borderRadius: 10}]}
           rippleColor={darkBrown}
         />
       </View>
       <View style={tw`flex-1 p-2 px-4`}>
-        <Divider style={tw`mb-1 mt-4`} bold={true} />
-        <View style={tw`flex-1 w-full justify-center items-center`}>
-          <TheSearch />
-          <Text style={[tw`text-lg font-light text-center text-gray-600 mt-4 tracking-0.5`, { fontFamily: 'Lato_Regular' }]}>Search. Connect. Get it done.</Text>
-        </View>
+        <Divider style={tw`mb-1 mt-2 shadow`} bold={true} />
+        {loading ? (
+           <View style={tw`flex-1 justify-center items-center`}>
+            <ActivityIndicator size="large" color={darkBrown} />
+            <Text>Loading...</Text>
+          </View>
+        ) : (
+        searchResult ? (
+          <View style={tw`flex-1 w-full`}>
+            {
+              searchResult.length <= 0 ? (
+                <Text>Not found</Text>  
+              ) : (
+                <FlatList
+                  data={searchResult}
+                  style={tw`-mb-2`}
+                  renderItem={({ item }) => <TechnicianList id={item._id} businessName={item.businessName} category={item.category} address={item.address} ratings={item.avgRatings} route='singleTechnician' cardStyle='m-2 mx-0 p-3 bg-white shadow' />}
+                  keyExtractor={(item, index) => index.toString()}
+                />
+              )
+            }
+          </View>
+        ) : (
+          <View style={tw`flex-1 w-full justify-center items-center`}>
+            <TheSearch />
+            <Text style={[tw`text-lg font-light text-center text-gray-600 mt-4 tracking-0.5`, { fontFamily: 'Lato_Regular' }]}>Search. Connect. Get it done.</Text>
+          </View>
+        ))}
       </View>
     </View>
   );

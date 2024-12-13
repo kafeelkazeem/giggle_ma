@@ -9,6 +9,15 @@ export function getInitials(name) {
       .join(""); // Join the initials together
 }
 
+export function capitalize(str) {
+  if (!str) return ''; // Handle empty or null strings
+  return str
+    .toLowerCase() // Convert the entire string to lowercase
+    .split(' ') // Split the string into words
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+    .join(' '); // Join the words back into a single string
+}
+
 export const fetchToken = async () => {
   try {
     const userData = await AsyncStorage.getItem('user');

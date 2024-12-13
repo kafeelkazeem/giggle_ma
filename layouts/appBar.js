@@ -31,7 +31,7 @@ const AppBar = () => {
       {/* AppBar */}
       <Appbar.Header
         style={[
-          tw`h-25 p-2`, 
+          tw`h-22 p-2`, 
           {
             backgroundColor: darkBrown,
             padding: 2,

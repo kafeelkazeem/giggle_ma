@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native'; 
 import { Card, Avatar, Text, Button } from 'react-native-paper';
 import tw from 'twrnc';
@@ -6,8 +6,9 @@ import Pic from '../assets/image/avater.png'
 import Feather from '@expo/vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'
 import CustomStarRating from './starRating/starRating';
+import { capitalize } from '../util/helpers';
   
-const TechnicianList = ({id, businessName, category, address, ratings, route}) => {
+const TechnicianList = ({id, businessName, category, address, ratings, route, cardStyle}) => {
 
   const navigation = useNavigation()
 
@@ -16,7 +17,7 @@ const TechnicianList = ({id, businessName, category, address, ratings, route}) =
   }
 
   return (
-    <Card style={tw`m-3 p-3`}>
+    <Card style={tw`${cardStyle}`}>
       <View style={tw`flex-row`}>
         {/* Profile picture on the left */}
         <Avatar.Image 
@@ -28,8 +29,8 @@ const TechnicianList = ({id, businessName, category, address, ratings, route}) =
         {/* Right side content */}
         <View style={tw`flex-1 gap-1`}>
           {/* Name, category, address */}
-          <Text style={tw`text-xl font-bold`}>{businessName}</Text>
-          <Text style={tw`text-sm text-gray-600`}>{category}</Text>
+          <Text style={tw`text-xl font-bold`}>{capitalize(businessName)}</Text>
+          <Text style={tw`text-base text-gray-600`}>{capitalize(category)}</Text>
           <Text style={tw`text-sm text-gray-600`}><Feather name="map-pin" size={18} color='grey' />{` ${address}`}</Text>
           
           {/* Custom Star ratings */}
@@ -38,7 +39,7 @@ const TechnicianList = ({id, businessName, category, address, ratings, route}) =
           </View>
 
           {/* Action buttons */}
-          <View style={tw`flex-row justify-between gap-2 mt-2`}>
+          <View style={tw`flex-row justify-between gap-1 mt-2`}>
             <Button mode="contained" onPress={onView}>
               View
             </Button>

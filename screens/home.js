@@ -46,7 +46,7 @@ const HomePage = () => {
           <FlatList
             data={filteredCategories}
             keyExtractor={(item, index) => index.toString()}
-            style={tw`-mb-3 -mt-3`}
+            style={tw`-mb-3 -mt-2`}
             numColumns={3}
             renderItem={({ item }) => (
               <TouchableOpacity
