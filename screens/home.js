@@ -29,12 +29,12 @@ const HomePage = () => {
       <View style={tw`flex-1 p-3 pt-3`}>
         {/* Pass the searchQuery and setSearchQuery to the Search component */}
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <View style={tw`my-1 p-2 `}>
+        <View style={tw`my-1 p-2`}>
           <Text style={[tw`font-bold text-3xl tracking-0.3`, { fontFamily: 'Lato_Regular' }]}>
             Professions
           </Text>
         </View>
-        <Divider style={tw`mb-1`} bold={true} />
+        <Divider style={tw`mb-3 shadow`} bold={true} />
         {/* Display fallback text if no category is found */}
         {filteredCategories.length === 0 ? (
           <View style={tw`flex-1 justify-center items-center`}>
@@ -46,11 +46,11 @@ const HomePage = () => {
           <FlatList
             data={filteredCategories}
             keyExtractor={(item, index) => index.toString()}
-            style={tw`-mb-3 -mt-1`}
+            style={tw`-mb-3 -mt-3`}
             numColumns={3}
             renderItem={({ item }) => (
               <TouchableOpacity
-                style={tw`flex-1 items-center p-4`}
+                style={tw`flex-1 items-center p-4 -m-1 -mx-3 -my-2`}
                 onPress={() => handleCategoryPress(item)}
               >
                 <View style={[tw`w-18 h-18 rounded-2xl p-2`, { backgroundColor: 'rgba(221, 161, 94, 0.2)', borderWidth: 1, borderColor: 'grey' }]}>

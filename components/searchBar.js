@@ -8,6 +8,7 @@ const Search = ({ searchQuery, setSearchQuery }) => {
     <View>
       <Searchbar
         placeholder="Search profession"
+        placeholderTextColor='grey'
         onChangeText={setSearchQuery}
         value={searchQuery}
         mode='bar'

@@ -26,6 +26,7 @@ const SearchPage = () => {
       <View style={tw`flex-row items-center px-3 mt-4`}>
         <Searchbar
           placeholder="search by name, address, profess....."
+          placeholderTextColor={'grey'}
           onChangeText={setSearchQuery}
           value={searchQuery}
           mode='bar'
@@ -39,6 +40,7 @@ const SearchPage = () => {
         <Divider style={tw`mb-1 mt-4`} bold={true} />
         <View style={tw`flex-1 w-full justify-center items-center`}>
           <TheSearch />
+          <Text style={[tw`text-lg font-light text-center text-gray-600 mt-4 tracking-0.5`, { fontFamily: 'Lato_Regular' }]}>Search. Connect. Get it done.</Text>
         </View>
       </View>
     </View>
