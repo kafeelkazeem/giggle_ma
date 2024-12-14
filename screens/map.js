@@ -7,6 +7,7 @@ import { Picker } from '@react-native-picker/picker';
 import { ApiUrl } from '../util/url';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native'
+import { capitalize } from '../util/helpers';
 
 const MapScreen = () => {
 
@@ -99,8 +100,8 @@ const MapScreen = () => {
           >
             <Callout onPress={() => navigation.navigate('singleTechnician', {technicianId: marker._id})}>
               <View style={tw`flex flex-col`}>
-                <Text style={tw`font-bold`}>{marker.businessName}</Text>
-                <Text>{marker.category}</Text>
+                <Text style={tw`font-bold`}>{capitalize(marker.businessName)}</Text>
+                <Text>{capitalize(marker.category)}</Text>
               </View>
             </Callout>
           </Marker>
