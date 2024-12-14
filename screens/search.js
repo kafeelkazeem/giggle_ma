@@ -5,6 +5,7 @@ import tw from 'twrnc';
 import { darkBrown, lightBrown } from "../util/colors";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import TheSearch from '../assets/svg/search.svg'
+import NoResult from '../assets/svg/no_result.svg'
 import TechnicianList from "../components/technicianList";
 import { ApiUrl } from "../util/url";
 import axios from "axios";
@@ -62,14 +63,17 @@ const SearchPage = () => {
         {loading ? (
            <View style={tw`flex-1 justify-center items-center`}>
             <ActivityIndicator size="large" color={darkBrown} />
-            <Text>Loading...</Text>
+            <Text>Searching...</Text>
           </View>
         ) : (
         searchResult ? (
           <View style={tw`flex-1 w-full`}>
             {
               searchResult.length <= 0 ? (
-                <Text>Not found</Text>  
+                <View style={tw`flex-1 w-full justify-center items-center gap-4`}>
+                  <NoResult />
+                  <Text style={[tw`text-lg font-light text-center text-gray-600 tracking-0.5`, { fontFamily: 'Lato_Regular' }]}>No Results</Text>
+                </View>  
               ) : (
                 <FlatList
                   data={searchResult}
