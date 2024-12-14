@@ -10,7 +10,7 @@ import BookButton from "../components/buttons/bookButton";
 import StarRatingEdit from "../components/starRating/starRating(edit)";
 import axios from "axios";
 import { ApiUrl } from "../util/url";
-import { fetchCustomerId, fetchToken, getInitials } from "../util/helpers";
+import { capitalize, fetchCustomerId, fetchToken, getInitials } from "../util/helpers";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
 import moment from "moment";
@@ -158,9 +158,9 @@ const SingleTechnician = ({route}) => {
               />
               <View style={tw`flex-1 flex-col gap-2`}>
                 <Text style={tw`text-2xl font-semibold text-gray-900`}>
-                  {technicianData.businessName}
+                  {capitalize(technicianData.businessName)}
                 </Text>
-                <Text style={tw`text-base text-gray-600`}>{technicianData.category}</Text>
+                <Text style={tw`text-base text-gray-600`}>{capitalize(technicianData.category)}</Text>
                 <View style={tw`flex-row items-center gap-1`}>
                   <Feather name="map-pin" size={18} color={lightBrown} />
                   <Text style={tw`text-sm text-gray-500`}>
@@ -230,7 +230,7 @@ const SingleTechnician = ({route}) => {
                   {/* Review Details */}
                   <View style={tw`flex-1`}>
                     <View style={tw`flex flex-row w-full justify-between items-center`}>
-                      <Text style={tw`text-base font-semibold text-gray-800`}>{review.customer.fullName}</Text>
+                      <Text style={tw`text-base font-semibold text-gray-800`}>{capitalize(review.customer.fullName)}</Text>
                       {customerId == review.customer._id && <ReviewMenu onPress={() => onDeleteReview(customerReviews, review._id)}  />}
                     </View>
                     <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
