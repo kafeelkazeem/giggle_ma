@@ -34,22 +34,22 @@ const content = [
     {
         title: 'Profile',
         icon: <Entypo name="user" size={25} color='black' />,
-        action: ''
+        action: () => console.log('pressed')
     },
     {
         title: 'Change Password',
         icon: <Entypo name="key" size={25} color='black' />,
-        action: ''
+        action: () => console.log('pressed')
     },
     {
         title: 'Search Range',
         icon: <FontAwesome name="map-marker" size={25} color='black' />,
-        action: ''
+        action: () => console.log('pressed')
     },
     {
         title: 'Terms and Condition',
         icon: <FontAwesome name="legal" size={25} color='black' />,
-        action: ''
+        action: () => console.log('pressed')
     },
     {
         title: 'Logout',
