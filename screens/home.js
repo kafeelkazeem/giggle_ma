@@ -34,7 +34,7 @@ const HomePage = () => {
             Professions
           </Text>
         </View>
-        <Divider style={tw`mb-3 shadow`} bold={true} />
+        <Divider style={tw`mb-2 shadow`} bold={true} />
         {/* Display fallback text if no category is found */}
         {filteredCategories.length === 0 ? (
           <View style={tw`flex-1 justify-center items-center`}>
@@ -46,7 +46,7 @@ const HomePage = () => {
           <FlatList
             data={filteredCategories}
             keyExtractor={(item, index) => index.toString()}
-            style={tw`-mb-3 -mt-2`}
+            style={tw`-mb-3 -mt-2 pt-2`}
             numColumns={3}
             renderItem={({ item }) => (
               <TouchableOpacity
