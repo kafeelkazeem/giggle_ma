@@ -111,30 +111,38 @@ const SigninPage = ({ navigation }) => {
                 </View>
 
                 {/* Remember Me */}
-                <View style={tw`flex-row items-center mb-4`}>
-                  <Checkbox
+                <View style={tw`flex-row items-center mb-4 -mt-1 w-full`}>
+                  {/* <Checkbox
                     status={rememberMe ? 'checked' : 'unchecked'}
                     onPress={() => setRememberMe(!rememberMe)}
                     color={darkBrown}
-                  />
-                  <Text style={[tw`ml-2 text-gray-700 text-lg tracking-0.1`, { fontFamily: 'Lato_Regular' }]}>Remember Me</Text>
+                  /> */}
+                  <Text style={[tw`ml-2 text-[${darkBrown}] text-base tracking-0.1 text-right`, { fontFamily: 'Lato_Regular' }]}>Forgot Password?</Text>
                 </View>
 
                 {/* Login Button */}
                 <Button
                   mode="contained"
                   onPress={handleSubmit}
-                  style={[tw`mb-4 p-1`, styles.signUpButton, { backgroundColor: darkBrown }]}
+                  style={[tw`mb-4 p-1 mt-2`, styles.signUpButton, { backgroundColor: darkBrown }]}
                   disabled={loading}
                 >
                   {loading ? <ActivityIndicator size={25} color="#fff" /> : 'Login'}
                 </Button>
+                <View style={tw`flex items-center justify-center mt-3`}>
+                  <Text style={[tw`text-gray-500 text-lg`, { fontFamily: 'Lato_Regular' }]}>
+                    Dont't have an account?{' '}
+                    <Text style={tw`font-bold text-[${darkBrown}]`} onPress={()=> navigation.navigate('Signup')}>
+                      Signup
+                    </Text>
+                  </Text>
+                 </View>
               </>
             )}
           </Formik>
 
-          <Text style={[tw`text-center text-lg text-gray-500 mb-4`, { fontFamily: 'Lato_Regular' }]}>- Or login with -</Text>
-          <AltAuth />
+          {/* <Text style={[tw`text-center text-lg text-gray-500 mb-4`, { fontFamily: 'Lato_Regular' }]}>- Or login with -</Text>
+          <AltAuth /> */}
         </View>
 
         {/* Snackbar for showing error */}

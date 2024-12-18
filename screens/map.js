@@ -80,7 +80,7 @@ const MapScreen = () => {
       <TouchableOpacity style={styles.dropdownContainer}>
         <Picker
           selectedValue={selectedCategory}
-          style={styles.picker}
+          style={tw`flex-1 text-white h-20`}
           dropdownIconColor='white'
           onValueChange={(itemValue) => setSelectedCategory(itemValue)}
         >
@@ -125,19 +125,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 50,
     right: 10,
-    backgroundColor: 'rgba(0,0,0,0.4)', // Green background
+    backgroundColor: 'rgba(0,0,0,0.4)', 
     borderRadius: 10,
-    padding: 0,
+    padding: 1,
+    paddingTop: 5,
+    paddingBottom: 5,
     width: 160,
-    zIndex: 10, // Ensure it stays above the map
+    height: 50,
+    zIndex: 10, 
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  picker: {
-    height: 20,
-    color: 'white', // Change text color
-    flex: 1,
   },
   icon: {
     marginRight: 10,

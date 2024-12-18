@@ -61,8 +61,7 @@ const SignupPage = ({ navigation }) => {
     >
       <ScrollView contentContainerStyle={tw`flex-grow justify-center`} keyboardShouldPersistTaps="handled">
         <View style={[tw`p-4`]}>
-          <Text style={[tw`text-2xl font-bold text-left mb-6`, { fontFamily: 'Lato_Regular' }]}>Sign Up</Text>
-
+          <Text style={[tw`text-2xl font-bold text-left mb-3`, { fontFamily: 'Lato_Regular' }]}>Sign Up</Text>
           <Formik
             initialValues={{ fullName: '', email: '', phone: '', password: '', confirmPassword: '' }}
             validationSchema={validationSchema}
@@ -100,7 +99,7 @@ const SignupPage = ({ navigation }) => {
                   <View key={index}>
                     <View
                       style={[
-                        tw`flex-row items-center border p-3 mb-2 rounded-xl`,
+                        tw`flex-row items-center border p-3 mb-3 rounded-xl`,
                         focusedField === field.placeholder && { borderColor: darkBrown },
                       ]}
                     >
@@ -132,7 +131,7 @@ const SignupPage = ({ navigation }) => {
                 <Button
                   mode="contained"
                   onPress={handleSubmit}
-                  style={[tw`mb-4 p-1`, styles.signUpButton, { backgroundColor: darkBrown }]}
+                  style={[tw`mb-4 p-1 mt-5`, styles.signUpButton, { backgroundColor: darkBrown }]}
                   disabled={loading} // Disable button when loading
                 >
                   {loading ? <ActivityIndicator color="#fff" /> : 'Sign Up'}
@@ -140,13 +139,12 @@ const SignupPage = ({ navigation }) => {
               </>
             )}
           </Formik>
-
-          <Text style={[tw`text-center text-lg text-gray-500 mb-4`, { fontFamily: 'Lato_Regular' }]}>- Or sign up with -</Text>
-          <AltAuth />
-          <View style={tw`flex items-center justify-center mt-6`}>
+          {/* <Text style={[tw`text-center text-lg text-gray-500 mb-4`, { fontFamily: 'Lato_Regular' }]}>- Or sign up with -</Text>
+          <AltAuth /> */}
+          <View style={tw`flex items-center justify-center mt-3`}>
             <Text style={[tw`text-gray-500 text-lg`, { fontFamily: 'Lato_Regular' }]}>
               Already have an account?{' '}
-              <Text style={{ color: darkBrown }} onPress={handleLogin}>
+              <Text style={tw`font-bold text-[${darkBrown}]`} onPress={handleLogin}>
                 Login
               </Text>
             </Text>
