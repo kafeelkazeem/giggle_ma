@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 0,
     width: 160,
+    height: 35,
     zIndex: 10, // Ensure it stays above the map
     flexDirection: 'row',
     alignItems: 'center',
