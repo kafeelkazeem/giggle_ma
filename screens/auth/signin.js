@@ -110,13 +110,8 @@ const SigninPage = ({ navigation }) => {
                   {errors.password && touched.password && <Text style={[tw`text-red-500 mt-2`, {fontFamily:'Lato_Regular'}]}>{errors.password}</Text>}
                 </View>
 
-                {/* Remember Me */}
-                <View style={tw`flex-row items-center mb-4 -mt-1 w-full`}>
-                  {/* <Checkbox
-                    status={rememberMe ? 'checked' : 'unchecked'}
-                    onPress={() => setRememberMe(!rememberMe)}
-                    color={darkBrown}
-                  /> */}
+                {/* Forgot password */}
+                <View style={tw`flex w-full justify-end mb-4 -mt-1`}>
                   <Text style={[tw`ml-2 text-[${darkBrown}] text-base tracking-0.1 text-right`, { fontFamily: 'Lato_Regular' }]}>Forgot Password?</Text>
                 </View>
 

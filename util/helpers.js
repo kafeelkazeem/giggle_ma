@@ -41,3 +41,15 @@ export const fetchCustomerId = async () => {
     console.error('Error fetching user data:', error);
   }
 }
+
+export const fetchCustomerDetails = async () => {
+  try {
+    const userData = await AsyncStorage.getItem('user');
+    if (userData) {
+      const user = JSON.parse(userData);
+      return {fullname: capitalize(user.customer.fullName), phoneNumber: user.customer.phoneNumber}
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+  }
+}
