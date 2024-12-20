@@ -8,7 +8,9 @@ import Entypo from "@expo/vector-icons/Entypo";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { fetchCustomerDetails } from "../util/helpers";
+import { fetchCustomerDetails, fetchCustomerId, fetchToken } from "../util/helpers";
+import axios from "axios";
+import { ApiUrl } from "../util/url";
 
 const logout = () => {
   Alert.alert("Log Out", "Are you sure you want to log out?", [
@@ -58,15 +60,35 @@ const SettingsPage = () => {
     setModalVisible(true);
   };
 
+  const onSaveProfile = async () =>{
+    if((fullName !== '' && fullName) && (phoneNumber !== '' & phoneNumber)){
+      return alert('Enter Full name and Phone number')
+    }
+    const formData = {fullName, phoneNumber}
+    try {
+      const token = await fetchToken()
+      const response = await axios.put(`${ApiUrl}/updateProfile`, formData, {
+        headers : {
+          Authorization: `${token}`
+        }
+      })
+      alert('saved')
+      setModalVisible(false)
+    } catch (error) {
+      console.log(error)
+      alert('An error occured')
+    }
+  }
+
   const renderModalContent = () => {
     switch (modalContent) {
       case "Profile":
         return (
           <View style={tw`p-5`}>
             <Text style={tw`text-xl font-bold mb-4`}>Edit Profile</Text>
-            <TextInput value={fullName} placeholder="Name" style={tw`border p-3 mb-4 rounded`} />
-            <TextInput value={phoneNumber} keyboardType="phone-pad" placeholder="Phone Number" style={tw`border p-3 mb-4 rounded`} />
-            <Button color={darkBrown} title="Save" onPress={() => setModalVisible(false)} />
+            <TextInput value={fullName} placeholder="Name" onChangeText={(text) => setFullName(text)} style={tw`border p-3 mb-4 rounded`} />
+            <TextInput value={phoneNumber} keyboardType="phone-pad" placeholder="Phone Number" onChangeText={(text) => setPhoneNumber(text)} style={tw`border p-3 mb-4 rounded`} />
+            <Button color={darkBrown} title="Save" onPress={onSaveProfile} />
           </View>
         );
       case "Change Password":
