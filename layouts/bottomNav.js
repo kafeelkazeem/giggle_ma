@@ -7,6 +7,7 @@ import SearchPage from '../screens/search';
 import HomePage from '../screens/home';
 import { darkBrown } from '../util/colors';
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomePageRoute = () => <HomePage /> ;
 
@@ -35,7 +36,9 @@ const BottomNav = () => {
             },
             {
               text: "Logout",
-              onPress: () => navigation.navigate('Signin'),
+              onPress: async () =>{
+                await AsyncStorage.removeItem('user') 
+                navigation.navigate('Signin')},
               style: "destructive",
             },
           ],

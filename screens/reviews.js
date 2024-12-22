@@ -4,7 +4,7 @@ import { Card } from 'react-native-paper';
 import tw from "twrnc";
 import CustomStarRating from '../components/starRating/starRating';
 import { lightBrown } from '../util/colors';
-import { fetchCustomerId, fetchToken, getInitials } from '../util/helpers';
+import { capitalize, fetchCustomerId, fetchToken, getInitials } from '../util/helpers';
 import moment from 'moment';
 import axios from 'axios';
 import { ApiUrl } from '../util/url';
@@ -18,7 +18,7 @@ const Reviews = ({ route, navigation }) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: businessName, // Set header title dynamically
+      title: capitalize(businessName), // Set header title dynamically
     });
   }, [navigation, businessName]);
 
@@ -56,7 +56,7 @@ const Reviews = ({ route, navigation }) => {
       {/* Review Details */}
       <View style={tw`flex-1`}>
         <View style={tw`flex flex-row w-full justify-between items-center`}>
-          <Text style={tw`text-base font-semibold text-gray-800`}>{item.customer.fullName}</Text>
+          <Text style={tw`text-base font-semibold text-gray-800`}>{capitalize(item.customer.fullName)}</Text>
           {customerId == item.customer._id && <ReviewMenu onPress={() => onDeleteReview(customerReviews, item._id)}  />}
         </View>
         <Text style={tw`text-sm text-gray-700 my-1`}>{item.review}</Text>

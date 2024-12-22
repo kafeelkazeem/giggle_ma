@@ -6,6 +6,8 @@ import TechnicianList from '../components/technicianList';
 import axios from 'axios';
 import { ApiUrl } from '../util/url';
 import { darkBrown } from '../util/colors';
+import { capitalize } from '../util/helpers';
+import Void from '../assets/svg/void.svg'
 
 const SelectedCategory = ({route, navigation}) => {
   const {categoryName} = route.params;
@@ -85,8 +87,11 @@ const SelectedCategory = ({route, navigation}) => {
       {/* Pass the fetched technicians to the TechnicianList */}
       {/* <TechnicianList technicians={technicians} /> */}
       {technicians.length <= 0 ? (
-            <View style={tw`flex-1 justify-center items-center`}>
-              <Text style={tw`text-xl`}>{`No nearby ${categoryName} found`.toLowerCase()}</Text>
+            <View style={tw`flex-1 justify-center items-center gap-4`}>
+              <View>
+                  <Void />
+              </View>
+              <Text style={tw`text-lg font-lighter text-center text-gray-600 tracking-0.5`}>{`No nearby ${capitalize(categoryName)} found`}</Text>
             </View>
         ) : (
           <FlatList

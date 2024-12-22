@@ -96,6 +96,13 @@ const SettingsPage = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       return alert("Please fill out all fields.");
     }
+    // Validate new password: must be alphanumeric and at least 5 characters long
+    const passwordRegex = /^[a-zA-Z0-9]{5,}$/;
+    if (!passwordRegex.test(newPassword)) {
+      return alert(
+        "New password must be at least 5 characters long and contain only letters and numbers."
+      );
+    }
     if (newPassword !== confirmPassword) {
       return alert("New passwords do not match.");
     }
@@ -111,12 +118,13 @@ const SettingsPage = () => {
       alert("Password changed successfully.");
       setModalVisible(false);
     } catch (error) {
-      console.error(error);
-      alert("An error occurred while changing the password.");
+      console.log(error.response?.data);
+      alert(error.response?.data?.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   const renderModalContent = () => {
     switch (modalContent) {
