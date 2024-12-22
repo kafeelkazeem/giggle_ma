@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   dropdownContainer: {
     position: 'absolute',
-    top: 50,
+    top: 20,
     right: 10,
     backgroundColor: 'rgba(0,0,0,0.4)', 
     borderRadius: 10,
