@@ -103,7 +103,7 @@ const MapScreen = () => {
               <View style={tw`flex flex-col`}>
                 <Text style={tw`font-bold`}>{capitalize(marker.businessName)}</Text>
                 <Text>{capitalize(marker.category)}</Text>
-              </View>
+              </View> 
             </Callout>
           </Marker>
         ))}
