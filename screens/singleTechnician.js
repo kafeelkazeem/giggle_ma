@@ -160,14 +160,14 @@ const SingleTechnician = ({route}) => {
                 <Text style={tw`text-2xl font-semibold text-gray-900`}>
                   {capitalize(technicianData.businessName)}
                 </Text>
-                <Text style={tw`text-base text-gray-600`}>{capitalize(technicianData.category)}</Text>
+                <Text style={tw`text-base text-gray-600`}>{capitalize(technicianData.profession)}</Text>
                 <View style={tw`flex-row items-center gap-1`}>
                   <Feather name="map-pin" size={18} color={lightBrown} />
                   <Text style={tw`text-sm text-gray-500`}>
-                    {technicianData.address}
+                    {technicianData.location.address}
                   </Text>
                 </View>
-                <CustomStarRating rating={technicianData.avgRatings} />
+                <CustomStarRating rating={technicianData.rating.avgRatings} />
               </View>
             </View>
           </Card>

@@ -16,7 +16,7 @@ const MapScreen = () => {
 
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState('All'); // State for selected technician
+  const [selectedProfession, setSelectedProfession] = useState('All'); // State for selected technician
   const [filteredMarkers, setFilteredMarkers] = useState([]);
   const [technicians, setTechnicians] = useState([])
 
@@ -40,16 +40,18 @@ const MapScreen = () => {
       try {
         const response = await axios.get(`${ApiUrl}/techniciansLocation`, {
           params:{
-            selectedCategory: selectedCategory
+            selectedProfession: selectedProfession
           }
         })
+        console.log(response.data.techniciansLocation)
         setTechnicians(response.data.techniciansLocation)
       } catch (error) {
+        console.log(error)
         console.log('an error occured')
       }
     }
     fetchTechnician()
-  }, [selectedCategory]);
+  }, [selectedProfession]);
 
   // Show an error message if location is not available
   if (errorMsg) {
@@ -80,10 +82,10 @@ const MapScreen = () => {
       {/* Styled dropdown container */}
       <TouchableOpacity style={styles.dropdownContainer}>
         <Picker
-          selectedValue={selectedCategory}
+          selectedValue={selectedProfession}
           style={tw`flex-1 text-white h-20`}
           dropdownIconColor='white'
-          onValueChange={(itemValue) => setSelectedCategory(itemValue)}
+          onValueChange={(itemValue) => setSelectedProfession(itemValue)}
         >
           <Picker.Item label="All" value="All" />
           <Picker.Item label="Tailor" value="Tailor" />
@@ -97,12 +99,12 @@ const MapScreen = () => {
         {technicians.map((marker) => (
           <Marker
             key={marker._id}
-            coordinate={{ latitude: marker.latitude, longitude: marker.longitude }}
+            coordinate={{ latitude: marker.location.latitude, longitude: marker.location.longitude }}
           >
             <Callout onPress={() => navigation.navigate('singleTechnician', {technicianId: marker._id})}>
               <View style={tw`flex flex-col`}>
                 <Text style={tw`font-bold`}>{capitalize(marker.businessName)}</Text>
-                <Text>{capitalize(marker.category)}</Text>
+                <Text>{capitalize(marker.profession)}</Text>
               </View> 
             </Callout>
           </Marker>

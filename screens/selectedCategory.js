@@ -43,9 +43,9 @@ const SelectedCategory = ({route, navigation}) => {
       const fetchTechnicians = async () => {
         setLoading(true); // Start loading
         try {
-          const response = await axios.get(`${ApiUrl}/getSelectedCategory`, {
+          const response = await axios.get(`${ApiUrl}/getSelectedProfession`, {
             params: {
-              category: categoryName,
+              profession: categoryName,
               latitude: location.latitude,
               longitude: location.longitude,
             },
@@ -96,7 +96,7 @@ const SelectedCategory = ({route, navigation}) => {
         ) : (
           <FlatList
             data={technicians}
-            renderItem={({ item }) => <TechnicianList id={item._id} businessName={item.businessName} category={item.category} address={item.address} ratings={item.avgRatings} route='singleTechnician' cardStyle='m-3 p-3' />}
+            renderItem={({ item }) => <TechnicianList id={item._id} businessName={item.businessName} profession={item.profession} address={item.location.address} ratings={item.rating.avgRatings} route='singleTechnician' cardStyle='m-3 p-3' />}
             keyExtractor={(item, index) => index.toString()}
           />
         )}

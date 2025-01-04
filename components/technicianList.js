@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import CustomStarRating from './starRating/starRating';
 import { capitalize } from '../util/helpers';
   
-const TechnicianList = ({id, businessName, category, address, ratings, route, cardStyle}) => {
+const TechnicianList = ({id, businessName, profession, address, ratings, route, cardStyle}) => {
 
   const navigation = useNavigation()
 
@@ -30,7 +30,7 @@ const TechnicianList = ({id, businessName, category, address, ratings, route, ca
         <View style={tw`flex-1 gap-1`}>
           {/* Name, category, address */}
           <Text style={tw`text-xl font-bold`}>{capitalize(businessName)}</Text>
-          <Text style={tw`text-base text-gray-600`}>{capitalize(category)}</Text>
+          <Text style={tw`text-base text-gray-600`}>{capitalize(profession)}</Text>
           <Text style={tw`text-sm text-gray-600`}><Feather name="map-pin" size={18} color='grey' />{` ${address}`}</Text>
           
           {/* Custom Star ratings */}
