@@ -6,7 +6,7 @@ import TechnicianList from '../components/technicianList';
 import axios from 'axios';
 import { ApiUrl } from '../util/url';
 import { darkBrown } from '../util/colors';
-import { capitalize } from '../util/helpers';
+import { capitalize, fetchToken } from '../util/helpers';
 import Void from '../assets/svg/void.svg'
 
 const SelectedCategory = ({route, navigation}) => {
@@ -43,13 +43,18 @@ const SelectedCategory = ({route, navigation}) => {
       const fetchTechnicians = async () => {
         setLoading(true); // Start loading
         try {
+          const token = await fetchToken()
           const response = await axios.get(`${ApiUrl}/getSelectedProfession`, {
             params: {
               profession: categoryName,
               latitude: location.latitude,
               longitude: location.longitude,
             },
+            headers: {
+              Authorization: `${token}`,
+            },
           });
+          
           setTechnicians(response.data.nearestTechnician); // Store the fetched data
           console.log(response.data)
         } catch (error) {

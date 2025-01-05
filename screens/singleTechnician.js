@@ -4,7 +4,7 @@ import tw from "twrnc";
 import Pic from "../assets/image/avater.png";
 import { darkBrown, lightBrown } from "../util/colors";
 import Feather from "@expo/vector-icons/Feather";
-import { Card, Divider } from "react-native-paper";
+import { Card } from "react-native-paper";
 import CustomStarRating from "../components/starRating/starRating";
 import BookButton from "../components/buttons/bookButton";
 import StarRatingEdit from "../components/starRating/starRating(edit)";
@@ -24,7 +24,7 @@ const SingleTechnician = ({route}) => {
   const [customerId, setCustomerId] = useState('')
 
   const [isExpanded, setIsExpanded] = useState(false);
-  const [technicianData, setTechnicianData] = useState('')
+  const [technicianData, setTechnicianData] = useState({})
   const [customerReviews, setCustomerReviews] = useState([])
 
   const [reviewRating, setReviewRating] = useState(0)
@@ -164,10 +164,10 @@ const SingleTechnician = ({route}) => {
                 <View style={tw`flex-row items-center gap-1`}>
                   <Feather name="map-pin" size={18} color={lightBrown} />
                   <Text style={tw`text-sm text-gray-500`}>
-                    {technicianData.location.address}
+                    {technicianData?.location?.address || "Address not available"}
                   </Text>
                 </View>
-                <CustomStarRating rating={technicianData.rating.avgRatings} />
+                <CustomStarRating rating={technicianData?.rating?.avgRatings || 0} />
               </View>
             </View>
           </Card>
