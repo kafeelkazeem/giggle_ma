@@ -124,6 +124,23 @@ const SettingsPage = () => {
       setLoading(false);
     }
   };
+
+  const onUpdateSearchRange = async () =>{
+    setLoading(true)
+    try {
+      const token = await fetchToken()
+      await axios.put(`${ApiUrl}/updateSearchRange`, {searchRange: searchRange}, {
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
+      setModalVisible(false);
+    } catch (error) {
+      alert('An error occured')
+    }finally{
+      setLoading(false)
+    }
+  }
   
 
   const renderModalContent = () => {
@@ -205,12 +222,16 @@ const SettingsPage = () => {
                 selectedValue={searchRange}
                 onValueChange={(itemValue) => setSearchRange(itemValue)}
               >
-                <Picker.Item label="10km" value="10km" />
-                <Picker.Item label="20km" value="20km" />
-                <Picker.Item label="30km" value="30km" />
+                <Picker.Item label="5km" value={5} />
+                <Picker.Item label="10km" value={10} />
+                <Picker.Item label="15km" value={15} />
+                <Picker.Item label="20km" value={20} />
+                <Picker.Item label="30km" value={30} />
+                <Picker.Item label="50km" value={50} />
+                <Picker.Item label="60km" value={60} />
               </Picker>
             </View>
-            <Button color={darkBrown} title="Save" onPress={() => setModalVisible(false)} />
+            <Button color={darkBrown} title={loading ? 'Saving...' : 'Save'} onPress={onUpdateSearchRange} />
           </View>
         );
       default:

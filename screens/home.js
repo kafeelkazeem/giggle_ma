@@ -3,7 +3,7 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import tw from 'twrnc';
 import AppBar from '../layouts/appBar';
 import Search from '../components/searchBar';
-import { categories } from '../util/categories';
+import { professions } from '../util/professions';
 import Electrician from '../assets/svg/categories/electrician.svg';
 import { useNavigation } from '@react-navigation/native';
 import { Divider } from 'react-native-paper';
@@ -15,8 +15,8 @@ const HomePage = () => {
   const navigation = useNavigation()
 
   // Filter the categories based on the search query
-  const filteredCategories = categories.filter((category) =>
-    category.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+  const filteredCategories = professions.filter((profession) =>
+    profession.name.toLowerCase().startsWith(searchQuery.toLowerCase())
   );
 
   const handleCategoryPress = (category) => {
@@ -39,7 +39,7 @@ const HomePage = () => {
         {filteredCategories.length === 0 ? (
           <View style={tw`flex-1 justify-center items-center`}>
             <Text style={[tw`text-lg font-bold text-gray-500`, { fontFamily: 'Lato_Regular' }]}>
-              Category not available yet
+              Profession not available yet
             </Text>
           </View>
         ) : (
