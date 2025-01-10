@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Onboarding from './screens/onBoarding';
 import { useFonts } from 'expo-font';
-import { darkBrown, darkGreen, white } from './util/colors';
+import { darkBrown, white } from './util/colors';
 import SignupPage from './screens/auth/signup';
 import SigninPage from './screens/auth/signin';
 import BottomNav from './layouts/bottomNav';

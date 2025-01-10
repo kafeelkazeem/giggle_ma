@@ -22,18 +22,18 @@ const Onboarding = ({navigation}) => {
             dotStyle={tw`bg-gray-400`}
             activeDotStyle={{backgroundColor: darkBrown}}
         >
-        <View style={[tw`flex-1 justify-center items-center`, {backgroundColor: white}]}>
-            <Welcome width={width * 0.8} height={width * 0.8} />
-            <Text style={[tw`text-2xl mt-4 text-center tracking-1`, {fontFamily: 'Lato_Regular'}]}>Welcome To Giggle</Text>
-        </View>
-        <View style={[tw`flex-1 justify-center items-center`, {backgroundColor: white}]}>
-            <Map width={width * 0.8} height={width * 0.8} />
-            <Text style={[tw`text-2xl mt-4 text-center tracking-1`, {fontFamily: 'Lato_Regular'}]}>Search. Book. Relax</Text>
-        </View>
-        <View style={[tw`flex-1 justify-center items-center`, {backgroundColor: white}]}>
-            <Register width={width * 0.8} height={width * 0.8} />
-            <Text style={[tw`text-2xl mt-4 text-center tracking-1`, {fontFamily: 'Lato_Regular'}]}>Your job, their skill.</Text>
-        </View>
+          <View style={[tw`flex-1 justify-center items-center`, {backgroundColor: white}]}>
+              <Welcome width={width * 0.8} height={width * 0.8} />
+              <Text style={[tw`text-2xl mt-4 text-center tracking-1`, {fontFamily: 'Lato_Regular'}]}>Welcome To Giggle</Text>
+          </View>
+          <View style={[tw`flex-1 justify-center items-center`, {backgroundColor: white}]}>
+              <Map width={width * 0.8} height={width * 0.8} />
+              <Text style={[tw`text-2xl mt-4 text-center tracking-1`, {fontFamily: 'Lato_Regular'}]}>Search. Book. Relax</Text>
+          </View>
+          <View style={[tw`flex-1 justify-center items-center`, {backgroundColor: white}]}>
+              <Register width={width * 0.8} height={width * 0.8} />
+              <Text style={[tw`text-2xl mt-4 text-center tracking-1`, {fontFamily: 'Lato_Regular'}]}>Your job, their skill.</Text>
+          </View>
         </Swiper>
         <View style={tw`mb-6`}>
           <RoundButtonWithText onPress={() => navigation.navigate('Signup')} />
