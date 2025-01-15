@@ -30,7 +30,7 @@ const HomePage = () => {
         {/* Pass the searchQuery and setSearchQuery to the Search component */}
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <View style={tw`my-1 p-2`}>
-          <Text style={[tw`font-bold text-3xl tracking-0.3`, { fontFamily: 'Lato_Regular' }]}>
+          <Text style={[tw`font-bold text-2xl tracking-0.3`, { fontFamily: 'Lato_Regular' }]}>
             Professions
           </Text>
         </View>
