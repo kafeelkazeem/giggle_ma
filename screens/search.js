@@ -78,7 +78,7 @@ const SearchPage = () => {
                 <FlatList
                   data={searchResult}
                   style={tw`-mb-2`}
-                  renderItem={({ item }) => <TechnicianList id={item._id} businessName={item.businessName} profession={item.profession} address={item.location.address} ratings={item.rating.avgRatings} route='singleTechnician' cardStyle='m-2 mx-0 p-3 bg-white shadow' />}
+                  renderItem={({ item }) => <TechnicianList id={item._id} profilePicture={item.profilePicture} businessName={item.businessName} profession={item.profession} address={item.location.address} ratings={item.rating.avgRatings} route='singleTechnician' cardStyle='m-2 mx-0 p-3 bg-white shadow' />}
                   keyExtractor={(item, index) => index.toString()}
                 />
               )
