@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import CustomStarRating from './starRating/starRating';
 import { capitalize } from '../util/helpers';
   
-const TechnicianList = ({id, businessName, profession, address, ratings, route, cardStyle}) => {
+const TechnicianList = ({id, profilePicture, businessName, profession, address, ratings, route, cardStyle}) => {
 
   const navigation = useNavigation()
 
@@ -22,7 +22,7 @@ const TechnicianList = ({id, businessName, profession, address, ratings, route, 
         {/* Profile picture on the left */}
         <Avatar.Image 
           size={110} 
-          source={Pic} 
+          source={profilePicture ? {uri: profilePicture} : Pic} 
           style={tw`mr-3`}
         />
 
