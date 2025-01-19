@@ -3,7 +3,7 @@ import { View, Text, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 import Map from '../assets/svg/map.svg'
 import Register from '../assets/svg/register.svg'
-import Welcome from '../assets/svg/welcome.svg'
+import Welcome from '../assets/svg/landingImg.svg'
 import tw from 'twrnc'; 
 import { darkBrown, white } from '../util/colors';
 import RoundButtonWithText from '../components/buttons/getStartedBtn';
@@ -23,7 +23,7 @@ const Onboarding = ({navigation}) => {
             activeDotStyle={{backgroundColor: darkBrown}}
         >
           <View style={[tw`flex-1 justify-center items-center`, {backgroundColor: white}]}>
-              <Welcome width={width * 0.8} height={width * 0.8} />
+              <Welcome width={width * 0.9} height={width * 0.9} />
               <Text style={[tw`text-2xl mt-4 text-center tracking-1`, {fontFamily: 'Lato_Regular'}]}>Welcome To Giggle</Text>
           </View>
           <View style={[tw`flex-1 justify-center items-center`, {backgroundColor: white}]}>

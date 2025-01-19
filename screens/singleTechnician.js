@@ -153,7 +153,7 @@ const SingleTechnician = ({route}) => {
           <Card style={tw`bg-white shadow-md rounded-lg`}>
             <View style={tw`w-full flex flex-row items-center gap-4 p-4`}>
               <Image
-                source={Pic}
+                source={technicianData.profilePicture ? {uri: technicianData.profilePicture} : Pic}
                 style={tw`w-40 h-40 border-2 border-[${lightBrown}] rounded-2xl`}
               />
               <View style={tw`flex-1 flex-col gap-2`}>
@@ -178,21 +178,23 @@ const SingleTechnician = ({route}) => {
 
           {/* Description Card */}
           <Card style={tw`bg-white shadow-md rounded-lg p-4`}>
-            <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`,{ fontFamily: "Lato_Regular" },]}>Description</Text>
+            <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`, { fontFamily: "Lato_Regular" }]}>Bio</Text>
             <Text
               style={[
                 tw`text-sm text-gray-700 leading-6`,
                 { lineHeight: 22 },
-                isExpanded ? tw`mb-3` : { overflow: "hidden", height: 66 },
+                isExpanded ? tw`mb-3` : { overflow: "hidden", height: 45, textOverflow: 'ellipsis' },
               ]}
             >
-              {technicianData.description ? technicianData.description : descriptionText}
+              {technicianData.description ? technicianData.bio : descriptionText}
             </Text>
-            <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
-              <Text style={tw`text-sm text-[${darkBrown}] font-semibold`}>
-                {isExpanded ? "Read Less" : "Read More"}
-              </Text>
-            </TouchableOpacity>
+            {technicianData.description && technicianData.description.length > 100 && (
+              <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
+                <Text style={tw`text-sm text-[${darkBrown}] font-semibold`}>
+                  {isExpanded ? "Read Less" : "Read More"}
+                </Text>
+              </TouchableOpacity>
+            )}
           </Card>
 
           {/* Work Images Card */}
