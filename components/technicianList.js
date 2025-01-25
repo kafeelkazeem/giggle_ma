@@ -7,8 +7,9 @@ import Feather from '@expo/vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'
 import CustomStarRating from './starRating/starRating';
 import { capitalize } from '../util/helpers';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
   
-const TechnicianList = ({id, profilePicture, businessName, profession, address, ratings, route, cardStyle}) => {
+const TechnicianList = ({id, profilePicture, businessName, profession, address, isAvailable, ratings, route, cardStyle}) => {
 
   const navigation = useNavigation()
 
@@ -30,8 +31,23 @@ const TechnicianList = ({id, profilePicture, businessName, profession, address, 
         <View style={tw`flex-1 gap-1`}>
           {/* Name, category, address */}
           <Text style={tw`text-xl font-bold`}>{capitalize(businessName)}</Text>
-          <Text style={tw`text-base text-gray-600`}>{capitalize(profession)}</Text>
+          <Text style={tw`text-base text-gray-600`}><MaterialIcons name="handyman" size={18} color="grey" />{` ${capitalize(profession)}`}</Text>
           <Text style={tw`text-sm text-gray-600`}><Feather name="map-pin" size={18} color='grey' />{` ${address}`}</Text>
+          <View style={tw`flex flex-row items-center gap-1 mt-1`}>
+            {
+              isAvailable ? (
+                <>
+                  <View style={tw`w-3 h-3 rounded-full bg-[green]`}></View>
+                  <Text>Available</Text>
+                </>
+              ) : (
+                <>
+                  <View style={tw`w-3 h-3 rounded-full bg-[red]`}></View>
+                  <Text>Not Available</Text>
+                </>
+              )
+            }
+          </View>
           
           {/* Custom Star ratings */}
           <View style={tw`my-1`}>

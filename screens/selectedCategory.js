@@ -101,7 +101,7 @@ const SelectedCategory = ({route, navigation}) => {
         ) : (
           <FlatList
             data={technicians}
-            renderItem={({ item }) => <TechnicianList id={item._id} profilePicture={item.profilePicture} businessName={item.businessName} profession={item.profession} address={item.location.address} ratings={item.rating.avgRatings} route='singleTechnician' cardStyle='m-3 p-3' />}
+            renderItem={({ item }) => <TechnicianList id={item._id} profilePicture={item.profilePicture} businessName={item.businessName} profession={item.profession} address={item.location.address} isAvailable={item.availability.isAvailable} ratings={item.rating.avgRatings} route='singleTechnician' cardStyle='m-3 p-3' />}
             keyExtractor={(item, index) => index.toString()}
           />
         )}
