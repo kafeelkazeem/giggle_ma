@@ -13,7 +13,7 @@ const CustomStarRating = ({ rating }) => {
             <FontAwesome
               key={index}
               name='star'
-              size={20}
+              size={25}
               color={starNumber <= rating ? "#ffa723" : '#707070'}
               style={tw`mr-1`}
             />

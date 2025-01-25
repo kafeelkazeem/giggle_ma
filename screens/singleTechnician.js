@@ -15,6 +15,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
 import moment from "moment";
 import ReviewMenu from "../components/reviewMenu";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 const SingleTechnician = ({route}) => {
   
@@ -26,6 +27,8 @@ const SingleTechnician = ({route}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [technicianData, setTechnicianData] = useState({})
   const [customerReviews, setCustomerReviews] = useState([])
+
+  const [isAvailable, setIsAvailable] = useState('')
 
   const [reviewRating, setReviewRating] = useState(0)
   const [review, setReview] = useState('')
@@ -61,6 +64,7 @@ const SingleTechnician = ({route}) => {
       try {
         const response = await axios.get(`${ApiUrl}/singleTechnician?technicianId=${technicianId}`)
         setTechnicianData(response.data.singleTechnician)
+        setIsAvailable(response.data.singleTechnician.availability.isAvailable)
         console.log(response.data.singleTechnician)
         setLoading(false)      
       } catch (error) {
@@ -151,22 +155,40 @@ const SingleTechnician = ({route}) => {
         <View style={tw`flex-1 bg-white p-2 flex-col gap-6`}>
           {/* Profile Card */}
           <Card style={tw`bg-white shadow-md rounded-lg`}>
-            <View style={tw`w-full flex flex-row items-center gap-4 p-4`}>
+            <View style={tw`w-full flex flex-col items-center gap-5 p-5`}>
               <Image
                 source={technicianData.profilePicture ? {uri: technicianData.profilePicture} : Pic}
-                style={tw`w-40 h-40 border-2 border-[${lightBrown}] rounded-2xl`}
+                style={tw`w-40 h-40 border-2 border-[${lightBrown}] rounded-full`}
               />
-              <View style={tw`flex-1 flex-col gap-2`}>
+              <View style={tw`flex-1 flex-col gap-2 w-full justify-start`}>
                 <Text style={tw`text-2xl font-semibold text-gray-900`}>
                   {capitalize(technicianData.businessName)}
                 </Text>
+              <View style={tw`flex-row items-center gap-1`}>
+                <MaterialIcons name="handyman" size={18} color="grey" />
                 <Text style={tw`text-base text-gray-600`}>{capitalize(technicianData.profession)}</Text>
+               </View>
                 <View style={tw`flex-row items-center gap-1`}>
-                  <Feather name="map-pin" size={18} color={lightBrown} />
+                  <Feather name="map-pin" size={18} color="grey" />
                   <Text style={tw`text-sm text-gray-500`}>
                     {technicianData?.location?.address || "Address not available"}
                   </Text>
                 </View>
+                <View style={tw`flex flex-row items-center gap-1 mt-1 mb-2 px-1`}>
+                {
+                  isAvailable ? (
+                  <>
+                    <View style={tw`w-3 h-3 rounded-full bg-[green]`}></View>
+                    <Text style={tw`text-sm text-gray-600`}>Available</Text>
+                  </>
+                ) : (
+                <>
+                  <View style={tw`w-3 h-3 rounded-full bg-[red]`}></View>
+                  <Text style={tw`text-sm text-gray-600`}>Not Available</Text>
+                </>
+                )
+              }
+              </View>
                 <CustomStarRating rating={technicianData?.rating?.avgRatings || 0} />
               </View>
             </View>
