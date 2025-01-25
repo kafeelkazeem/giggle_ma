@@ -17,6 +17,7 @@ import moment from "moment";
 import ReviewMenu from "../components/reviewMenu";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import ProfileImages from "../components/profileImages";
+import Socials from "../components/socials";
 
 const SingleTechnician = ({route }) => {
   
@@ -183,10 +184,6 @@ const SingleTechnician = ({route }) => {
             </View>
           </Card>
 
-          {/* <Card style={tw`bg-white shadow-md rounded-lg p-4`}>
-            <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`,{ fontFamily: "Lato_Regular" },]}> Socials</Text>
-          </Card> */}
-
           {/* Description Card */}
           <Card style={tw`bg-white p-4`}>
             <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`, { fontFamily: "Lato_Regular" }]}>Bio</Text>
@@ -214,6 +211,11 @@ const SingleTechnician = ({route }) => {
               <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`, { fontFamily: "Lato_Regular" }]}>Images</Text>
             </View>
             <ProfileImages workImages={technicianData.pastJobsPicture} />
+          </Card>
+
+          <Card style={tw`bg-white shadow-md rounded-lg p-4`}>
+            <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`,{ fontFamily: "Lato_Regular" },]}> Socials</Text>
+            <Socials links={technicianData.socialLinks} />
           </Card>
 
           {/* Customer Reviews */}
