@@ -59,7 +59,7 @@ const SingleTechnician = ({route }) => {
         setLoading(false)      
       } catch (error) {
         console.log(error)
-        alert('an error occured')
+        alert('An error occured')
       }finally{
         setLoading(false)
       }
@@ -168,7 +168,7 @@ const SingleTechnician = ({route }) => {
                   isAvailable ? (
                   <>
                     <View style={tw`w-3 h-3 rounded-full bg-[green]`}></View>
-                    <Text style={tw`text-sm text-gray-600`}>Available</Text>
+                    <Text style={tw`text-sm text-gray-600`}>{`Available ( ${moment(technicianData.availability.hours.start).format('LT')} - ${moment(technicianData.availability.hours.end).format('LT')} )`}</Text>
                   </>
                 ) : (
                 <>
@@ -188,7 +188,7 @@ const SingleTechnician = ({route }) => {
           </Card> */}
 
           {/* Description Card */}
-          <Card style={tw`bg-white shadow-md rounded-lg p-4`}>
+          <Card style={tw`bg-white p-4`}>
             <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`, { fontFamily: "Lato_Regular" }]}>Bio</Text>
             <Text
               style={[
