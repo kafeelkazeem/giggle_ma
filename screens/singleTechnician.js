@@ -16,8 +16,9 @@ import { useNavigation } from "@react-navigation/native";
 import moment from "moment";
 import ReviewMenu from "../components/reviewMenu";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import ProfileImages from "../components/profileImages";
 
-const SingleTechnician = ({route}) => {
+const SingleTechnician = ({route }) => {
   
   const navigation = useNavigation()
 
@@ -41,16 +42,6 @@ const SingleTechnician = ({route}) => {
   
   const descriptionText = `Reliable Plumbing Solutions is your trusted partner for all plumbing needs, offering top-notch services to residential and commercial clients. From emergency repairs and leak fixes to comprehensive installation and maintenance, our experienced team delivers efficient and reliable solutions tailored to your needs.`;
 
-  // Sample images for the technician's past work
-  const workImages = [
-    require("../assets/image/work1.jpg"),
-    require("../assets/image/work2.jpg"),
-    require("../assets/image/work3.jpg"),
-    require("../assets/image/work4.jpg"),
-    require("../assets/image/work5.jpg"),
-    require("../assets/image/work6.jpg"),
-  ];
-
   useEffect(()=>{
     const func = async () =>{
       setCustomerId(await fetchCustomerId())
@@ -65,7 +56,6 @@ const SingleTechnician = ({route}) => {
         const response = await axios.get(`${ApiUrl}/singleTechnician?technicianId=${technicianId}`)
         setTechnicianData(response.data.singleTechnician)
         setIsAvailable(response.data.singleTechnician.availability.isAvailable)
-        console.log(response.data.singleTechnician)
         setLoading(false)      
       } catch (error) {
         console.log(error)
@@ -83,7 +73,6 @@ const SingleTechnician = ({route}) => {
       try {
         const response = await axios.get(`${ApiUrl}/getReview?technicianId=${technicianId}`)
         setCustomerReviews(response.data.reviews)
-        console.log(response.data.reviews)
         setLoadingReview(false)
       } catch (error) {
         console.log(error)
@@ -189,7 +178,7 @@ const SingleTechnician = ({route}) => {
                 )
               }
               </View>
-                <CustomStarRating rating={technicianData?.rating?.avgRatings || 0} />
+                <CustomStarRating rating={technicianData?.rating?.avgRatings || 0} size={25} />
               </View>
             </View>
           </Card>
@@ -221,16 +210,10 @@ const SingleTechnician = ({route}) => {
 
           {/* Work Images Card */}
           <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-0`}>
-            <View style={tw`flex-row flex-wrap justify-between`}>
-              {workImages.map((image, index) => (
-                <Image
-                  key={index}
-                  source={image}
-                  style={tw`w-[33%] h-40 mb-1 rounded-lg border-2`}
-                  resizeMode="cover"
-                />
-              ))}
+            <View style={tw`p-3`}>
+              <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`, { fontFamily: "Lato_Regular" }]}>Images</Text>
             </View>
+            <ProfileImages workImages={technicianData.pastJobsPicture} />
           </Card>
 
           {/* Customer Reviews */}
@@ -259,7 +242,7 @@ const SingleTechnician = ({route}) => {
                     </View>
                     <Text style={tw`text-sm text-gray-700 my-1`}>{review.review}</Text>
                     <View style={tw`flex flex-row w-full justify-between items-center`}>
-                      <CustomStarRating rating={review.rating} />
+                      <CustomStarRating rating={review.rating} size={20} />
                       <Text style={tw`text-sm text-[#8a817c]`}>{moment(review.createdAt).format('DD/MM/YY')}</Text>
                     </View>
                   </View>

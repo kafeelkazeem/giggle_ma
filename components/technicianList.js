@@ -51,7 +51,7 @@ const TechnicianList = ({id, profilePicture, businessName, profession, address, 
           
           {/* Custom Star ratings */}
           <View style={tw`my-1`}>
-            <CustomStarRating rating={ratings} />
+            <CustomStarRating rating={ratings} size={22} />
           </View>
 
           {/* Action buttons */}

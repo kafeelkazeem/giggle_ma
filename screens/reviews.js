@@ -61,7 +61,7 @@ const Reviews = ({ route, navigation }) => {
         </View>
         <Text style={tw`text-sm text-gray-700 my-1`}>{item.review}</Text>
         <View style={tw`flex flex-row w-full justify-between items-center`}>
-          <CustomStarRating rating={item.rating} />
+          <CustomStarRating rating={item.rating} size={20} />
           <Text style={tw`text-sm text-[#8a817c]`}>{moment(item.createdAt).format('DD/MM/YY')}</Text>
         </View>
       </View>
