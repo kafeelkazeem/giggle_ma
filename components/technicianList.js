@@ -38,12 +38,12 @@ const TechnicianList = ({id, profilePicture, businessName, profession, address, 
               isAvailable ? (
                 <>
                   <View style={tw`w-3 h-3 rounded-full bg-[green]`}></View>
-                  <Text>Available</Text>
+                  <Text style={tw`text-sm text-gray-600`}>Available</Text>
                 </>
               ) : (
                 <>
                   <View style={tw`w-3 h-3 rounded-full bg-[red]`}></View>
-                  <Text>Not Available</Text>
+                  <Text style={tw`text-sm text-gray-600`}>Not Available</Text>
                 </>
               )
             }
