@@ -6,19 +6,17 @@ import tw from 'twrnc';
 import { Picker } from '@react-native-picker/picker';
 import { ApiUrl } from '../util/url';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 import { capitalize } from '../util/helpers';
-import Electrician from '../assets/svg/categories/electrician.svg'
+import Electrician from '../assets/svg/categories/electrician.svg';
 
 const MapScreen = () => {
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [selectedProfession, setSelectedProfession] = useState('All'); // State for selected technician
-  const [filteredMarkers, setFilteredMarkers] = useState([]);
-  const [technicians, setTechnicians] = useState([])
+  const [technicians, setTechnicians] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -36,21 +34,21 @@ const MapScreen = () => {
   }, []);
 
   useEffect(() => {
-    const fetchTechnician = async () =>{
+    const fetchTechnician = async () => {
       try {
         const response = await axios.get(`${ApiUrl}/techniciansLocation`, {
-          params:{
-            selectedProfession: selectedProfession
-          }
-        })
-        console.log(response.data.techniciansLocation)
-        setTechnicians(response.data.techniciansLocation)
+          params: {
+            selectedProfession: selectedProfession,
+          },
+        });
+        console.log(response.data.techniciansLocation);
+        setTechnicians(response.data.techniciansLocation);
       } catch (error) {
-        console.log(error)
-        console.log('an error occured')
+        console.log(error);
+        console.log('An error occurred');
       }
-    }
-    fetchTechnician()
+    };
+    fetchTechnician();
   }, [selectedProfession]);
 
   // Show an error message if location is not available
@@ -84,7 +82,7 @@ const MapScreen = () => {
         <Picker
           selectedValue={selectedProfession}
           style={tw`flex-1 text-white h-20`}
-          dropdownIconColor='white'
+          dropdownIconColor="white"
           onValueChange={(itemValue) => setSelectedProfession(itemValue)}
         >
           <Picker.Item label="All" value="All" />
@@ -99,13 +97,18 @@ const MapScreen = () => {
         {technicians.map((marker) => (
           <Marker
             key={marker._id}
-            coordinate={{ latitude: marker.location.latitude, longitude: marker.location.longitude }}
+            coordinate={{
+              latitude: marker.location.latitude,
+              longitude: marker.location.longitude,
+            }}
+            title={capitalize(marker.businessName)}
+            description={capitalize(marker.profession)}
           >
-            <Callout onPress={() => navigation.navigate('singleTechnician', {technicianId: marker._id})}>
-              <View style={tw`flex flex-col`}>
-                <Text style={tw`font-bold`}>{capitalize(marker.businessName)}</Text>
-                <Text>{capitalize(marker.profession)}</Text>
-              </View> 
+            <Callout onPress={() => navigation.navigate('singleTechnician', { technicianId: marker._id })}>
+              {/* <View style={{ padding: 10 }}>
+                <Text style={{ fontWeight: 'bold' }}>{capitalize(marker.businessName || 'No business name')}</Text>
+                <Text>{capitalize(marker.profession || 'No profession')}</Text>
+              </View> */}
             </Callout>
           </Marker>
         ))}
@@ -128,20 +131,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 50,
     right: 10,
-    backgroundColor: 'rgba(0,0,0,0.4)', 
+    backgroundColor: 'rgba(0,0,0,0.4)',
     borderRadius: 10,
     padding: 1,
     paddingTop: 5,
     paddingBottom: 5,
     width: 160,
     height: 50,
-    zIndex: 10, 
+    zIndex: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  icon: {
-    marginRight: 10,
   },
 });
 
