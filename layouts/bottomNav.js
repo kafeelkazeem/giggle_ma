@@ -9,18 +9,16 @@ import { darkBrown } from '../util/colors';
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const HomePageRoute = () => <HomePage /> ;
+const HomePageRoute = () => <HomePage />;
 
-const SearchPageRoute = () => <SearchPage /> ;
+const SearchPageRoute = () => <SearchPage />;
 
 const MapPageRoute = () => <MapPage />;
 
 const SettingsPageRoute = () => <SettingsPage />;
 
-
 const BottomNav = () => {
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   useFocusEffect(
     React.useCallback(() => {
@@ -36,9 +34,10 @@ const BottomNav = () => {
             },
             {
               text: "Logout",
-              onPress: async () =>{
-                await AsyncStorage.removeItem('user') 
-                navigation.navigate('Signin')},
+              onPress: async () => {
+                await AsyncStorage.removeItem('user');
+                navigation.navigate('Signin');
+              },
               style: "destructive",
             },
           ],
@@ -58,10 +57,10 @@ const BottomNav = () => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'home', title: 'Home', focusedIcon: 'home'},
-    { key: 'search', title: 'Search', focusedIcon: 'magnify'},
+    { key: 'home', title: 'Home', focusedIcon: 'home' },
+    { key: 'search', title: 'Search', focusedIcon: 'magnify' },
     { key: 'map', title: 'Map', focusedIcon: 'map-marker' },
-    { key: 'settings', title: 'Settings', focusedIcon: 'cog'},
+    { key: 'settings', title: 'Settings', focusedIcon: 'cog' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -77,18 +76,18 @@ const BottomNav = () => {
       onIndexChange={setIndex}
       renderScene={renderScene}
       barStyle={styles.bottomNav}
-      activeColor= {darkBrown} 
-      activeIndicatorStyle={{backgroundColor: "rgba(70, 91, 31, 0.2)"}}
+      activeColor={darkBrown}
+      activeIndicatorStyle={{ backgroundColor: "rgba(70, 91, 31, 0.2)" }}
       sceneAnimationEnabled
-      sceneAnimationType='shifting'
+      sceneAnimationType="shifting"
       inactiveColor={'#000'}
     />
   );
 };
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   bottomNav: {
-    backgroundColor: '#fefae0', 
+    backgroundColor: '#fefae0',
   },
 });
 

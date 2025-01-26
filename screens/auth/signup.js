@@ -43,7 +43,7 @@ const SignupPage = ({ navigation }) => {
     } catch (error) {
       console.log(error);
       setSnackbarType('error');
-      setSnackbarMessage('Signup failed. Please try again.');
+      setSnackbarMessage(error.response.data.error);
     } finally {
       setLoading(false); 
       setSnackbarVisible(true);

@@ -48,8 +48,9 @@ const HomePage = () => {
             keyExtractor={(item, index) => index.toString()}
             style={tw`-mb-3 -mt-2 pt-2 pb-3`}
             numColumns={3}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity
+                key={index}
                 style={tw`flex-1 items-center p-4 -m-1 -mx-3 -my-2`}
                 onPress={() => handleCategoryPress(item)}
               >

@@ -96,7 +96,7 @@ const SelectedCategory = ({ route, navigation }) => {
       {technicians.length <= 0 ? (
         <View style={tw`flex-1 justify-center items-center gap-4`}>
           <Void />
-          <Text style={tw`text-lg font-lighter text-center text-gray-600 tracking-0.5`}>
+          <Text style={tw`text-lg font-light text-center text-gray-600 tracking-0.5`}>
             {`No nearby ${capitalize(categoryName)} found`}
           </Text>
         </View>

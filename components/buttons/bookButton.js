@@ -59,24 +59,6 @@ const BookButton = ({ phoneNumber, whatsapp, email }) => {
 
   return (
     <>
-      {/* Call Button */}
-      {fabOpen && (
-        <Animated.View
-          style={[
-            tw`absolute bottom-34 right-3`,
-            {
-              transform: [{ scale: scaleAnim }],
-            },
-          ]}
-        >
-          <TouchableOpacity
-            style={tw`w-14 h-14 bg-blue-600 my-5 rounded-full items-center justify-center shadow-lg`}
-            onPress={handleCall}
-          >
-            <Feather name="phone" size={24} color="white" />
-          </TouchableOpacity>
-        </Animated.View>
-      )}
 
       {/* WhatsApp Button */}
       {fabOpen && (
@@ -93,6 +75,25 @@ const BookButton = ({ phoneNumber, whatsapp, email }) => {
             onPress={handleWhatsApp}
           >
             <FontAwesome5 name="whatsapp" size={24} color="white" />
+          </TouchableOpacity>
+        </Animated.View>
+      )}
+
+      {/* Call Button */}
+      {fabOpen && (
+        <Animated.View
+          style={[
+            tw`absolute bottom-34 right-3`,
+            {
+              transform: [{ scale: scaleAnim }],
+            },
+          ]}
+        >
+          <TouchableOpacity
+            style={tw`w-14 h-14 bg-blue-600 my-5 rounded-full items-center justify-center shadow-lg`}
+            onPress={handleCall}
+          >
+            <Feather name="phone" size={24} color="white" />
           </TouchableOpacity>
         </Animated.View>
       )}

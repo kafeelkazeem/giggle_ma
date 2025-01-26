@@ -233,7 +233,6 @@ const SingleTechnician = ({route }) => {
             <>
             {customerReviews.length > 0 ? (
               customerReviews.slice(0, 4).map((review, key) => (
-                <>
                 <View key={key} style={tw`w-full flex flex-row items-start gap-3 mb-4 p-1`} >
                   {/* Avatar */}
                   <View style={tw`w-10 h-10 bg-[${lightBrown}] rounded-full flex items-center justify-center`}>
@@ -252,7 +251,6 @@ const SingleTechnician = ({route }) => {
                     </View>
                   </View>
                 </View>
-                </>
               ))
             ) : (
               <Text style={tw`text-gray-500 text-center my-4`}>No reviews available.</Text>
