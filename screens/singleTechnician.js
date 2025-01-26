@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity, TextInput, ActivityIndicator } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, TextInput, ActivityIndicator, RefreshControl } from "react-native";
 import tw from "twrnc";
 import Pic from "../assets/image/avater.png";
 import { darkBrown, lightBrown } from "../util/colors";
@@ -40,47 +40,53 @@ const SingleTechnician = ({route }) => {
   const [loading, setLoading] = useState(false)
   const [loadingReview, setLoadingReview] = useState(false)
 
-  useEffect(()=>{
-    const func = async () =>{
-      setCustomerId(await fetchCustomerId())
-    }
-    func()
-  }, [])
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(()=>{
-    setLoading(true)
-    const fetchTechnicianData = async () =>{
-      try {
-        const response = await axios.get(`${ApiUrl}/singleTechnician?technicianId=${technicianId}`)
-        setTechnicianData(response.data.singleTechnician)
-        setIsAvailable(response.data.singleTechnician.availability.isAvailable)
-        setLoading(false)      
-      } catch (error) {
-        console.log(error)
-        alert('An error occured')
-      }finally{
-        setLoading(false)
-      }
-    }
-    fetchTechnicianData()
-  }, [])
+  useEffect(() => {
+    const func = async () => {
+      setCustomerId(await fetchCustomerId());
+    };
+    func();
+  }, []);
 
-  useEffect(()=>{
-    setLoadingReview(true)
-    const fetchReviews = async () =>{
-      try {
-        const response = await axios.get(`${ApiUrl}/getReview?technicianId=${technicianId}`)
-        setCustomerReviews(response.data.reviews)
-        setLoadingReview(false)
-      } catch (error) {
-        console.log(error)
-        alert('an error occured')
-      }finally{
-        setLoadingReview(false)
-      }
+  const fetchTechnicianData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`${ApiUrl}/singleTechnician?technicianId=${technicianId}`);
+      setTechnicianData(response.data.singleTechnician);
+      setIsAvailable(response.data.singleTechnician.availability.isAvailable);
+    } catch (error) {
+      console.log(error);
+      alert("An error occurred");
+    } finally {
+      setLoading(false);
     }
-    fetchReviews()
-  }, [submitCnt])
+  };
+
+  const fetchReviews = async () => {
+    setLoadingReview(true);
+    try {
+      const response = await axios.get(`${ApiUrl}/getReview?technicianId=${technicianId}`);
+      setCustomerReviews(response.data.reviews);
+    } catch (error) {
+      console.log(error);
+      alert("An error occurred");
+    } finally {
+      setLoadingReview(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchTechnicianData();
+    fetchReviews();
+  }, [submitCnt]);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchTechnicianData();
+    await fetchReviews();
+    setRefreshing(false);
+  };
 
   const handleAddReview = async () => {
     const token = await fetchToken()
@@ -138,7 +144,7 @@ const SingleTechnician = ({route }) => {
 
   return (
     <View style={tw`flex-1`}>
-      <ScrollView style={tw`flex-1 bg-white`}>
+      <ScrollView style={tw`flex-1 bg-white`}  refreshControl={ <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         <View style={tw`flex-1 bg-white p-2 flex-col gap-6`}>
           {/* Profile Card */}
           <Card style={tw`bg-white shadow-md rounded-lg`}>
