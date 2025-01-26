@@ -276,7 +276,7 @@ const SingleTechnician = ({route }) => {
           </Card>
         </View>
       </ScrollView>
-      <BookButton />
+      <BookButton whatsapp='+2348068348811' phoneNumber='07019643123' email='kafeelkazeem@gmail.com' />
     </View>
   );
 };
