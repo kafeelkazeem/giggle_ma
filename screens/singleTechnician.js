@@ -40,9 +40,6 @@ const SingleTechnician = ({route }) => {
   const [loading, setLoading] = useState(false)
   const [loadingReview, setLoadingReview] = useState(false)
 
-  
-  const descriptionText = `Reliable Plumbing Solutions is your trusted partner for all plumbing needs, offering top-notch services to residential and commercial clients. From emergency repairs and leak fixes to comprehensive installation and maintenance, our experienced team delivers efficient and reliable solutions tailored to your needs.`;
-
   useEffect(()=>{
     const func = async () =>{
       setCustomerId(await fetchCustomerId())
@@ -194,7 +191,7 @@ const SingleTechnician = ({route }) => {
                 isExpanded ? tw`mb-3` : { overflow: "hidden", height: 45, textOverflow: 'ellipsis' },
               ]}
             >
-              {technicianData.description ? technicianData.bio : descriptionText}
+              {technicianData.bio}
             </Text>
             {technicianData.description && technicianData.description.length > 100 && (
               <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
@@ -213,10 +210,10 @@ const SingleTechnician = ({route }) => {
             <ProfileImages workImages={technicianData.pastJobsPicture} />
           </Card>
 
-          <Card style={tw`bg-white shadow-md rounded-lg p-4`}>
+          <View style={tw`bg-white shadow-md rounded-lg p-2`}>
             <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`,{ fontFamily: "Lato_Regular" },]}> Socials</Text>
             <Socials links={technicianData.socialLinks} />
-          </Card>
+          </View>
 
           {/* Customer Reviews */}
           <Card style={tw`bg-white w-[100%] shadow-md rounded-lg p-3 mt-1`}>
