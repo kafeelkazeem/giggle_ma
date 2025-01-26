@@ -12,16 +12,22 @@
       "backgroundColor": "#AA5B27"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.kafeelkazeem.Giggle"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "aedb4060-e1ae-4667-9537-c3b072a8161b"
+      }
     }
   }
 }

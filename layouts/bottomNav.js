@@ -10,11 +10,8 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomePageRoute = () => <HomePage />;
-
 const SearchPageRoute = () => <SearchPage />;
-
 const MapPageRoute = () => <MapPage />;
-
 const SettingsPageRoute = () => <SettingsPage />;
 
 const BottomNav = () => {
@@ -27,11 +24,7 @@ const BottomNav = () => {
           "Logout",
           "Are you sure you want to Logout?",
           [
-            {
-              text: "Cancel",
-              onPress: () => console.log("Exit cancelled"),
-              style: "cancel",
-            },
+            { text: "Cancel", onPress: () => console.log("Exit cancelled"), style: "cancel" },
             {
               text: "Logout",
               onPress: async () => {
@@ -56,19 +49,19 @@ const BottomNav = () => {
   );
 
   const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'home', title: 'Home', focusedIcon: 'home' },
-    { key: 'search', title: 'Search', focusedIcon: 'magnify' },
-    { key: 'map', title: 'Map', focusedIcon: 'map-marker' },
-    { key: 'settings', title: 'Settings', focusedIcon: 'cog' },
-  ]);
 
-  const renderScene = BottomNavigation.SceneMap({
-    home: HomePageRoute,
-    search: SearchPageRoute,
-    map: MapPageRoute,
-    settings: SettingsPageRoute,
-  });
+  // Assign `key` separately to avoid spreading it
+  const routes = [
+    { key: 'home', title: 'Home', focusedIcon: 'home', routeComponent: HomePageRoute },
+    { key: 'search', title: 'Search', focusedIcon: 'magnify', routeComponent: SearchPageRoute },
+    { key: 'map', title: 'Map', focusedIcon: 'map-marker', routeComponent: MapPageRoute },
+    { key: 'settings', title: 'Settings', focusedIcon: 'cog', routeComponent: SettingsPageRoute },
+  ];
+
+  const renderScene = ({ route }) => {
+    const currentRoute = routes.find(r => r.key === route.key);
+    return currentRoute?.routeComponent ? currentRoute.routeComponent() : null;
+  };
 
   return (
     <BottomNavigation
