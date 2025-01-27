@@ -1,21 +1,32 @@
 import * as React from 'react';
-import { BottomNavigation } from 'react-native-paper';
-import { Alert, BackHandler, StyleSheet } from 'react-native';
-import SettingsPage from '../screens/settings';
-import MapPage from '../screens/map';
-import SearchPage from '../screens/search';
-import HomePage from '../screens/home';
-import { darkBrown } from '../util/colors';
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert, BackHandler } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const HomePageRoute = () => <HomePage />;
-const SearchPageRoute = () => <SearchPage />;
-const MapPageRoute = () => <MapPage />;
-const SettingsPageRoute = () => <SettingsPage />;
+import HomePage from '../screens/home';
+import SearchPage from '../screens/search';
+import MapPage from '../screens/map';
+import SettingsPage from '../screens/settings';
+import { darkBrown } from '../util/colors';
 
 const BottomNav = () => {
   const navigation = useNavigation();
+  const [currentTab, setCurrentTab] = React.useState('home');
+
+  const renderScreen = () => {
+    switch (currentTab) {
+      case 'home':
+        return <HomePage />;
+      case 'search':
+        return <SearchPage />;
+      case 'map':
+        return <MapPage />;
+      case 'settings':
+        return <SettingsPage />;
+      default:
+        return <HomePage />;
+    }
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -48,39 +59,83 @@ const BottomNav = () => {
     }, [])
   );
 
-  const [index, setIndex] = React.useState(0);
-
-  // Assign `key` separately to avoid spreading it
-  const routes = [
-    { key: 'home', title: 'Home', focusedIcon: 'home', routeComponent: HomePageRoute },
-    { key: 'search', title: 'Search', focusedIcon: 'magnify', routeComponent: SearchPageRoute },
-    { key: 'map', title: 'Map', focusedIcon: 'map-marker', routeComponent: MapPageRoute },
-    { key: 'settings', title: 'Settings', focusedIcon: 'cog', routeComponent: SettingsPageRoute },
-  ];
-
-  const renderScene = ({ route }) => {
-    const currentRoute = routes.find(r => r.key === route.key);
-    return currentRoute?.routeComponent ? currentRoute.routeComponent() : null;
-  };
-
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-      barStyle={styles.bottomNav}
-      activeColor={darkBrown}
-      activeIndicatorStyle={{ backgroundColor: "rgba(70, 91, 31, 0.2)" }}
-      sceneAnimationEnabled
-      sceneAnimationType="shifting"
-      inactiveColor={'#000'}
-    />
+    <View style={styles.container}>
+      {/* Render Current Screen */}
+      <View style={styles.screenContainer}>{renderScreen()}</View>
+
+      {/* Custom Bottom Navigation */}
+      <View style={styles.bottomNav}>
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => setCurrentTab('home')}
+        >
+          <Icon name="home" size={24} color={currentTab === 'home' ? darkBrown : '#000'} />
+          <Text style={[styles.navText, currentTab === 'home' && styles.activeText]}>
+            Home
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => setCurrentTab('search')}
+        >
+          <Icon name="magnify" size={24} color={currentTab === 'search' ? darkBrown : '#000'} />
+          <Text style={[styles.navText, currentTab === 'search' && styles.activeText]}>
+            Search
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => setCurrentTab('map')}
+        >
+          <Icon name="map-marker" size={24} color={currentTab === 'map' ? darkBrown : '#000'} />
+          <Text style={[styles.navText, currentTab === 'map' && styles.activeText]}>
+            Map
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.navItem}
+          onPress={() => setCurrentTab('settings')}
+        >
+          <Icon name="cog" size={24} color={currentTab === 'settings' ? darkBrown : '#000'} />
+          <Text style={[styles.navText, currentTab === 'settings' && styles.activeText]}>
+            Settings
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  bottomNav: {
+  container: {
+    flex: 1,
     backgroundColor: '#fefae0',
+  },
+  screenContainer: {
+    flex: 1,
+    padding: 0,
+  },
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#fefae0',
+    paddingVertical: 18,
+    borderTopWidth: 0,
+    borderTopColor: '#ccc',
+  },
+  navItem: {
+    alignItems: 'center',
+  },
+  navText: {
+    fontSize: 12,
+    color: '#000',
+  },
+  activeText: {
+    color: darkBrown,
   },
 });
 

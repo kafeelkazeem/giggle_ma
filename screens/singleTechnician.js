@@ -13,11 +13,11 @@ import { ApiUrl } from "../util/url";
 import { capitalize, fetchCustomerId, fetchToken, getInitials } from "../util/helpers";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
-import moment from "moment";
 import ReviewMenu from "../components/reviewMenu";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import ProfileImages from "../components/profileImages";
 import Socials from "../components/socials";
+import moment from "moment/moment";
 
 const SingleTechnician = ({route }) => {
   

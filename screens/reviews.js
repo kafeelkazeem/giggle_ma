@@ -5,10 +5,10 @@ import tw from "twrnc";
 import CustomStarRating from '../components/starRating/starRating';
 import { lightBrown } from '../util/colors';
 import { capitalize, fetchCustomerId, fetchToken, getInitials } from '../util/helpers';
-import moment from 'moment';
 import axios from 'axios';
 import { ApiUrl } from '../util/url';
 import ReviewMenu from '../components/reviewMenu';
+import moment from 'moment';
 
 const Reviews = ({ route, navigation }) => {
   const { customerReviews, businessName } = route.params;
