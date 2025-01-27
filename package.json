@@ -17,6 +17,7 @@
     "axios": "^1.7.7",
     "expo": "~52.0.26",
     "expo-location": "~18.0.5",
+    "expo-splash-screen": "~0.29.21",
     "expo-status-bar": "~2.0.1",
     "formik": "^2.4.6",
     "moment": "^2.30.1",
@@ -34,7 +35,8 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.11"
   },
   "private": true
 }

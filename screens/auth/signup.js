@@ -4,7 +4,6 @@ import tw from 'twrnc';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button, Snackbar } from 'react-native-paper'; 
 import { darkBrown } from '../../util/colors';
-import AltAuth from '../../components/socialAuth';
 import axios from 'axios';
 import { ApiUrl } from '../../util/url';
 import * as Yup from 'yup';

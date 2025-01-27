@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Image } from 'react-native';
 import tw from 'twrnc';
 import { Appbar, Avatar } from 'react-native-paper';
-import { white, darkBrown } from '../util/colors';
+import { darkBrown } from '../util/colors';
 import logo from '../assets/logo/cover.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getInitials } from '../util/helpers';

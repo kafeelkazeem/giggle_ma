@@ -8,7 +8,6 @@ import { ApiUrl } from '../util/url';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { capitalize } from '../util/helpers';
-import Electrician from '../assets/svg/categories/electrician.svg';
 
 const MapScreen = () => {
   const navigation = useNavigation();
