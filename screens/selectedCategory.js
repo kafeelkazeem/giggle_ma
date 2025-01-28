@@ -112,6 +112,9 @@ const SelectedCategory = ({ route, navigation }) => {
               address={item.location.address}
               isAvailable={item.availability.isAvailable}
               ratings={item.rating.avgRatings}
+              whatsappNumber={item.contact.WhatsAppNumber}
+              phoneNumber={item.contact.phoneNumber}
+              email={item.email}
               route="singleTechnician"
               cardStyle="m-3 p-3"
             />
