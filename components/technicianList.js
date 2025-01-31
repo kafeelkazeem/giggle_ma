@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Added useState import
+import React, { useState } from 'react'; 
 import { Linking, TouchableOpacity, View } from 'react-native';
 import { Card, Avatar, Text, Button, Portal, Modal } from 'react-native-paper';
 import tw from 'twrnc';
@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import CustomStarRating from './starRating/starRating';
 import { capitalize } from '../util/helpers';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { darkBrown } from '../util/colors';
 

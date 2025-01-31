@@ -8,6 +8,7 @@ import { ApiUrl } from '../util/url';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { capitalize } from '../util/helpers';
+import { professions } from '../util/professions';
 
 const MapScreen = () => {
   const navigation = useNavigation();
@@ -84,11 +85,12 @@ const MapScreen = () => {
           dropdownIconColor="white"
           onValueChange={(itemValue) => setSelectedProfession(itemValue)}
         >
-          <Picker.Item label="All" value="All" />
-          <Picker.Item label="Tailor" value="Tailor" />
-          <Picker.Item label="Carpenter" value="Carpenter" />
-          <Picker.Item label="Electrician" value="Electrician" />
-          <Picker.Item label="Painter" value="Painter" />
+            <Picker.Item label="All" value="All" />
+          {
+            professions.map((item) =>{
+              <Picker.Item label={item.name} value={item.value} /> 
+            })
+          }
         </Picker>
       </TouchableOpacity>
 

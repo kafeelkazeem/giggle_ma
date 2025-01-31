@@ -47,9 +47,17 @@ export const fetchCustomerDetails = async () => {
     const userData = await AsyncStorage.getItem('user');
     if (userData) {
       const user = JSON.parse(userData);
-      return {fullname: capitalize(user.customer.fullName), phoneNumber: user.customer.phoneNumber}
+      return {fullname: capitalize(user.customer.fullName), phoneNumber: user.customer.phoneNumber, searchRange: user.customer.searchRange}
     }
   } catch (error) {
     console.error('Error fetching user data:', error);
   }
 }
+
+// export const setSearchRange = async (value) =>{
+//   try {
+    
+//   } catch (error) {
+//     console.error('Error fetching user data:', error);
+//   }
+// }

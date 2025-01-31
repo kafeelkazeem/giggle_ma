@@ -49,7 +49,7 @@ const SettingsPage = () => {
   const [newPassword, setNewPassword] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [searchRange, setSearchRange] = useState('10km');
+  const [searchRange, setSearchRange] = useState();
   const [loading, setLoading] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -60,6 +60,7 @@ const SettingsPage = () => {
       const details = await fetchCustomerDetails();
       setFullName(details.fullname);
       setPhoneNumber(details.phoneNumber.toString());
+      setSearchRange(details.searchRange)
     };
     func();
   }, []);
