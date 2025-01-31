@@ -1,9 +1,7 @@
 import Electrician from '../assets/svg/categories/electrician.svg'
 import Plumber from '../assets/svg/categories/plumber.svg'
-import Dj from '../assets/svg/categories/dj.svg'
 import Builder from '../assets/svg/categories/builder.svg'
 import Cleaner from '../assets/svg/categories/cleaner.svg'
-import Mc from '../assets/svg/categories/mc.svg'
 import Painter from '../assets/svg/categories/painter.svg'
 import Mechanic from '../assets/svg/categories/mechanic.svg'
 import Carpenter from '../assets/svg/categories/carpenter.svg'
@@ -19,6 +17,10 @@ import Cake from '../assets/svg/categories/cake.svg'
 import Gen from '../assets/svg/categories/gen.svg'
 import Makeup from '../assets/svg/categories/makeup.svg'
 import Tv from '../assets/svg/categories/tv.svg'
+import Solar from '../assets/svg/categories/solar.svg'
+import Fridge from '../assets/svg/categories/fridge.svg'
+import Ac from '../assets/svg/categories/Ac.svg'
+import Aluminum from '../assets/svg/categories/aluminum.svg'
 
 export const professions = [
     { name: 'Carpenter', svg: <Carpenter /> },
@@ -26,20 +28,22 @@ export const professions = [
     { name: 'Mechanic', svg: <Mechanic /> },
     { name: 'Plumber', svg: <Plumber />  },
     { name: 'Painter', svg: <Painter /> },
+    { name: 'Photographer', svg: <Photographer /> },
+    { name: 'Solar Install', svg: <Solar /> },
     { name: 'Cleaner', svg: <Cleaner /> },
+    { name: 'Fridge Repair', svg: <Fridge /> },
+    { name: 'Ac Repair', svg: <Ac />},
     { name: 'Laundry', svg: <Laundry /> },
     { name: 'Bricklayer', svg: <Builder /> },
     { name: 'Welder', svg: <Welder /> }, 
     { name: 'Architect', svg: <Architect /> },
+    { name: 'Aluminium', svg: <Aluminum />},
     { name: 'Barber', svg: <Barber /> },
     { name: 'Tailor', svg: <Tailor /> },
     { name: 'Hair Dresser', svg: <Hairdresser />},
     { name: 'Caterer', svg: <Cake />},
     { name: 'Generator Repair', svg: <Gen /> },
-    { name: 'Photographer', svg: <Photographer /> },
     { name: 'Electronic Repair', svg: <Tv /> },
     { name: 'Phone Repair', svg: <Phone />},
-    { name: 'Dj', svg: <Dj /> },
-    { name: 'Mc', svg: <Mc /> },
     { name: 'Makeup Artist', svg: <Makeup /> }
   ];

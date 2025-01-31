@@ -15,43 +15,49 @@ const MapScreen = () => {
 
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [selectedProfession, setSelectedProfession] = useState('All'); // State for selected technician
-  const [technicians, setTechnicians] = useState([]);
+  const [selectedProfession, setSelectedProfession] = useState('All'); 
+  const [allTechnicians, setAllTechnicians] = useState([]); // Store all technicians
+  const [technicians, setTechnicians] = useState([]); // Store filtered technicians
 
   useEffect(() => {
     (async () => {
-      // Request permission for location access
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
       }
-
-      // Get the current location
       let loc = await Location.getCurrentPositionAsync({});
       setLocation(loc.coords);
     })();
   }, []);
 
   useEffect(() => {
-    const fetchTechnician = async () => {
+    const fetchTechnicians = async () => {
       try {
-        const response = await axios.get(`${ApiUrl}/techniciansLocation`, {
-          params: {
-            selectedProfession: selectedProfession,
-          },
-        });
+        const response = await axios.get(`${ApiUrl}/techniciansLocation`);
         console.log(response.data.techniciansLocation);
-        setTechnicians(response.data.techniciansLocation);
+        setAllTechnicians(response.data.techniciansLocation);
+        setTechnicians(response.data.techniciansLocation); // Initially set all
       } catch (error) {
         console.log(error);
         console.log('An error occurred');
       }
     };
-    fetchTechnician();
-  }, [selectedProfession]);
+    fetchTechnicians();
+  }, []);
 
-  // Show an error message if location is not available
+  useEffect(() => {
+    if (selectedProfession === 'All') {
+      setTechnicians(allTechnicians); // Show all technicians
+    } else {
+      const filtered = allTechnicians.filter(
+        (tech) => tech.profession.toLowerCase() === selectedProfession.toLowerCase()
+      );
+      console.log("Filtered Technicians:", filtered);
+      setTechnicians(filtered);
+    }
+  }, [selectedProfession, allTechnicians ]);
+
   if (errorMsg) {
     return (
       <View style={styles.container}>
@@ -60,7 +66,6 @@ const MapScreen = () => {
     );
   }
 
-  // Default region to display on the map
   const region = location
     ? {
         latitude: location.latitude,
@@ -69,28 +74,25 @@ const MapScreen = () => {
         longitudeDelta: 0.05,
       }
     : {
-        latitude: 12.002179, // Latitude of Kano, Nigeria
-        longitude: 8.591956, // Longitude of Kano, Nigeria
+        latitude: 12.002179,
+        longitude: 8.591956,
         latitudeDelta: 0.05,
         longitudeDelta: 0.05,
       };
 
   return (
     <View style={styles.container}>
-      {/* Styled dropdown container */}
       <TouchableOpacity style={styles.dropdownContainer}>
         <Picker
           selectedValue={selectedProfession}
           style={tw`flex-1 text-white h-20`}
           dropdownIconColor="white"
-          onValueChange={(itemValue) => setSelectedProfession(itemValue)}
+          onValueChange={(itemValue) =>(setSelectedProfession(itemValue))}
         >
-            <Picker.Item label="All" value="All" />
-          {
-            professions.map((item) =>{
-              <Picker.Item label={item.name} value={item.value} /> 
-            })
-          }
+          <Picker.Item label="All" value="All" />
+          {professions.map((item, key) => (
+            <Picker.Item key={item.value || key} label={item.name} value={item.value} />
+          ))}
         </Picker>
       </TouchableOpacity>
 
@@ -106,10 +108,6 @@ const MapScreen = () => {
             description={capitalize(marker.profession)}
           >
             <Callout onPress={() => navigation.navigate('singleTechnician', { technicianId: marker._id })}>
-              {/* <View style={{ padding: 10 }}>
-                <Text style={{ fontWeight: 'bold' }}>{capitalize(marker.businessName || 'No business name')}</Text>
-                <Text>{capitalize(marker.profession || 'No profession')}</Text>
-              </View> */}
             </Callout>
           </Marker>
         ))}
