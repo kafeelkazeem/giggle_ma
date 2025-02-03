@@ -86,7 +86,7 @@ const SelectedCategory = ({ route, navigation }) => {
     return (
       <View style={tw`flex-1 justify-center items-center`}>
         <ActivityIndicator size="large" color={darkBrown} />
-        <Text>Loading technicians...</Text>
+        <Text>Finding Technicians....</Text>
       </View>
     );
   }
