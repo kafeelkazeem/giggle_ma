@@ -89,9 +89,9 @@ const MapScreen = () => {
           dropdownIconColor="white"
           onValueChange={(itemValue) =>(setSelectedProfession(itemValue))}
         >
-          <Picker.Item label="All" value="All" />
+          <Picker.Item label="All Professions" value="All" />
           {professions.map((item, key) => (
-            <Picker.Item key={item.value || key} label={item.name} value={item.value} />
+            <Picker.Item key={item.value || key} label={item.name} value={item.name} />
           ))}
         </Picker>
       </TouchableOpacity>
