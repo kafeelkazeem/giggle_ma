@@ -187,7 +187,7 @@ const SingleTechnician = ({route }) => {
             </View>
           </Card>
 
-          {/* Description Card */}
+          {/* Bio Card */}
           <Card style={tw`bg-white p-4`}>
             <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`, { fontFamily: "Lato_Regular" }]}>Bio</Text>
             <Text
@@ -199,7 +199,7 @@ const SingleTechnician = ({route }) => {
             >
               {technicianData.bio}
             </Text>
-            {technicianData.description && technicianData.description.length > 100 && (
+            {technicianData.bio && technicianData.bio.length > 100 && (
               <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
                 <Text style={tw`text-sm text-[${darkBrown}] font-semibold`}>
                   {isExpanded ? "Read Less" : "Read More"}
@@ -214,6 +214,27 @@ const SingleTechnician = ({route }) => {
               <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`, { fontFamily: "Lato_Regular" }]}>Images</Text>
             </View>
             <ProfileImages workImages={technicianData.pastJobsPicture} />
+          </Card>
+
+          {/* description Card */}
+          <Card style={tw`bg-white p-4`}>
+            <Text style={[tw`font-bold text-2xl mb-1 text-gray-800`, { fontFamily: "Lato_Regular" }]}>Description of Service</Text>
+            <Text
+              style={[
+                tw`text-sm text-gray-700 leading-6 mt-2`,
+                { lineHeight: 22 },
+                isExpanded ? tw`mb-3` : { overflow: "hidden", height: 45, textOverflow: 'ellipsis' },
+              ]}
+            >
+              {technicianData.description}
+            </Text>
+            {technicianData.description && technicianData.description.length > 100 && (
+              <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
+                <Text style={tw`text-sm text-[${darkBrown}] font-semibold`}>
+                  {isExpanded ? "Read Less" : "Read More"}
+                </Text>
+              </TouchableOpacity>
+            )}
           </Card>
 
           <View style={tw`bg-white shadow-md rounded-lg p-2`}>
