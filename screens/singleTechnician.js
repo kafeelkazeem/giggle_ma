@@ -223,7 +223,7 @@ const SingleTechnician = ({route }) => {
               style={[
                 tw`text-sm text-gray-700 leading-6 mt-2`,
                 { lineHeight: 22 },
-                isExpanded ? tw`mb-3` : { overflow: "hidden", height: 45, textOverflow: 'ellipsis' },
+                isExpanded ? tw`mb-3 h-full` : { overflow: "hidden", textOverflow: 'ellipsis' },
               ]}
             >
               {technicianData.description}
